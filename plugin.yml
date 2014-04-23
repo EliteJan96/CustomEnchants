@@ -1,0 +1,18 @@
+version: 1.4
+main: io.github.searchndstroy.Main
+name: CustomEnchants
+auther: searchndstroy, megagamer10
+permissions:
+    customenchants.*:
+        description: Gives access to all customenchant commands
+        children:
+            customenchants.customenchants: true
+            customenchants.enchant: true
+            customenchants.reload: true
+commands:
+   customenchants:
+      aliases: [ce]
+      description: Gives the player you specify a specified enchanted item. 
+      usage: 
+      permission: customenchants.customenchants
+      permission-message: Permission denied.
