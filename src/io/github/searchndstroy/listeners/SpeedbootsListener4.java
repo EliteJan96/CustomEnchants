@@ -31,15 +31,20 @@ import org.bukkit.potion.PotionEffectType;
 
 public class SpeedbootsListener4 implements Listener {
 	
-	public Main plugin;
+	   Main plugin;
+	    public SpeedbootsListener4 (Main instance) {
+	 
+	        plugin = instance;
+	 
+	        }
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void  onPlayerMoveEvent(PlayerMoveEvent event) {
 		
 		Entity player = event.getPlayer();
-		int seconds0 = this.plugin.getCustomConfig().getInt("Speed.V.seconds");
+		int seconds0 = plugin.getCustomConfig().getInt("Speed.V.seconds");
 		int seconds = seconds0*20;
-		int amplifier0 = this.plugin.getCustomConfig().getInt("Speed.V.amplifier");
+		int amplifier0 = plugin.getCustomConfig().getInt("Speed.V.amplifier");
 		int amplifier = amplifier0-1;
 		
 		if (player instanceof Player) {

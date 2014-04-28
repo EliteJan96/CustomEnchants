@@ -18,6 +18,8 @@
 
 package io.github.searchndstroy.listeners;
 
+import io.github.searchndstroy.Main;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.HumanEntity;
@@ -32,11 +34,26 @@ import org.bukkit.potion.PotionEffectType;
 
 public class LeechHungerswordListener0 implements Listener {
 	
+    Main plugin;
+    public LeechHungerswordListener0 (Main instance) {
+ 
+        plugin = instance;
+ 
+        }
+	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent29(EntityDamageByEntityEvent event) {
 		
 		Entity attacker = (Entity) event.getDamager();
 		Entity defender = (Entity) event.getEntity();
+		int seconds0 = plugin.getCustomConfig().getInt("Leechhunger.I.seconds.saturation");
+		int seconds1 = plugin.getCustomConfig().getInt("Leechhunger.I.seconds.hunger");
+		int seconds = seconds0*20;
+		int seconds01 = seconds1*20;
+		int amplifier0 = plugin.getCustomConfig().getInt("Leechhunger.I.amplifier.saturation");
+		int amplifier1 = plugin.getCustomConfig().getInt("Leechhunger.I.amplifier.hunger");
+		int amplifier01 = amplifier1-1;
+		int amplifier = amplifier0-1;
 		
 		if(attacker instanceof Player) {
 			
@@ -48,8 +65,8 @@ public class LeechHungerswordListener0 implements Listener {
 						
 						if(((HumanEntity) attacker ).getItemInHand().getItemMeta().getLore().get(0).equals("§r§7LeechHunger I")) {
 							
-							((LivingEntity) attacker).addPotionEffect(new PotionEffect (PotionEffectType.SATURATION, 2, 0));
-							((LivingEntity) defender).addPotionEffect(new PotionEffect (PotionEffectType.HUNGER, 30, 3));
+							((LivingEntity) attacker).addPotionEffect(new PotionEffect (PotionEffectType.SATURATION, seconds, amplifier));
+							((LivingEntity) defender).addPotionEffect(new PotionEffect (PotionEffectType.HUNGER, seconds01, amplifier01));
 						}
 						
 					}

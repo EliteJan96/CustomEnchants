@@ -33,7 +33,12 @@ import org.bukkit.potion.PotionEffectType;
 
 public class SlowswordListener2 implements Listener {
 	
-	public Main plugin;
+	   Main plugin;
+	    public SlowswordListener2 (Main instance) {
+	 
+	        plugin = instance;
+	 
+	        }
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent17(EntityDamageByEntityEvent event) {

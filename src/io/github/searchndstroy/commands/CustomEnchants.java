@@ -14,8 +14,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class CustomEnchants implements CommandExecutor {
-	private Main plugin;
-
+	
+    Main plugin;
+    public CustomEnchants (Main instance) {
+ 
+        plugin = instance;
+ 
+        }
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
@@ -70,8 +75,7 @@ public class CustomEnchants implements CommandExecutor {
 					
 					if (args[0].equalsIgnoreCase("reload")) {
 						
-						//this.plugin.reloadCustomConfig();
-						//this.plugin.getCustomConfig();
+						plugin.reloadCustomConfig();
 						
 						return false;
 					} else if (args[0].equalsIgnoreCase("enchant")) {

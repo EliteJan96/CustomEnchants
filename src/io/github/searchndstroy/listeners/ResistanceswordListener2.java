@@ -34,7 +34,12 @@ import org.bukkit.potion.PotionEffectType;
 
 public class ResistanceswordListener2 implements Listener {
 	
-	public Main plugin;
+	   Main plugin;
+	    public ResistanceswordListener2 (Main instance) {
+	 
+	        plugin = instance;
+	 
+	        }
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent30(EntityDamageByEntityEvent event) {

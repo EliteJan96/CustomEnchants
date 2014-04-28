@@ -34,7 +34,12 @@ import org.bukkit.potion.PotionEffectType;
 
 public class NauseaswordListener1 implements Listener {
 	
-	public Main plugin;
+	   Main plugin;
+	    public NauseaswordListener1 (Main instance) {
+	 
+	        plugin = instance;
+	 
+	        }
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent24(EntityDamageByEntityEvent event) {

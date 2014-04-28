@@ -31,7 +31,12 @@ import org.bukkit.potion.PotionEffectType;
 
 public class SpeedbootsListener2 implements Listener {
 	
-	public Main plugin;
+	   Main plugin;
+	    public SpeedbootsListener2 (Main instance) {
+	 
+	        plugin = instance;
+	 
+	        }
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void  onPlayerMoveEvent(PlayerMoveEvent event) {

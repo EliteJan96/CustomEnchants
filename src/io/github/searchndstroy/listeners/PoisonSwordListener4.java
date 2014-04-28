@@ -33,7 +33,12 @@ import org.bukkit.potion.PotionEffectType;
 
 public class PoisonSwordListener4 implements Listener {
 	
-	public Main plugin;
+	   Main plugin;
+	    public PoisonSwordListener4 (Main instance) {
+	 
+	        plugin = instance;
+	 
+	        }
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent9(EntityDamageByEntityEvent event) {

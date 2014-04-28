@@ -32,7 +32,12 @@ import org.bukkit.potion.PotionEffectType;
 
 public class StrengthhelmetListener4 implements Listener {
 	
-	public Main plugin;
+	   Main plugin;
+	    public StrengthhelmetListener4 (Main instance) {
+	 
+	        plugin = instance;
+	 
+	        }
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {

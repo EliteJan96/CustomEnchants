@@ -15,8 +15,6 @@
     along with CustomEnchants.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
 package io.github.searchndstroy.listeners;
 
 import io.github.searchndstroy.Main;
@@ -33,44 +31,73 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-
-
 public class BlindswordListener0 implements Listener {
-	
-	public Main plugin;
-	
+
+    Main plugin;
+    public BlindswordListener0 (Main instance) {
+ 
+        plugin = instance;
+ 
+        }
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent17(EntityDamageByEntityEvent event) {
-		
+
 		Entity attacker = (Entity) event.getDamager();
 		Entity defender = (Entity) event.getEntity();
-		int seconds0 = plugin.getCustomConfig().getInt("Blind.I.seconds");
-		int seconds = seconds0*20;
-		int amplifier0 = plugin.getCustomConfig().getInt("Blind.I.amplifier");
-		int amplifier = amplifier0-1;
-		
-		if(attacker instanceof Player) {
-			
-			if(defender instanceof Player) {
-				
-				if (!((HumanEntity) attacker).getInventory().getItemInHand().equals(null) || ((HumanEntity) attacker).getInventory().getItemInHand().equals(Material.AIR)) {
-					
-					if(((HumanEntity) attacker).getItemInHand().getItemMeta().hasLore()) {
-						
-						if(((HumanEntity) attacker ).getItemInHand().getItemMeta().getLore().get(0).equals("§r§7Blindness I")) {
-							
-							((LivingEntity) defender).addPotionEffect(new PotionEffect (PotionEffectType.BLINDNESS, seconds, amplifier));
+		double seconds0;
+		double seconds;
+		double amplifier0;
+		double amplifier;
+		double math = 100.0;
+		double chance;
+
+		seconds0 = plugin.getCustomConfig().getDouble("Blind.I.seconds");
+		seconds = seconds0 * 20;
+		amplifier0 = plugin.getCustomConfig().getDouble("Blind.I.amplifier");
+		amplifier = amplifier0 - 1;
+		chance = plugin.getCustomConfig().getDouble("Blind.I.chance");
+
+		int random = (int) (Math.random() * math);
+
+		int amplifier1 = (int) (amplifier * 1);
+		int seconds1 = (int) (seconds * 1);
+
+		if (random < chance) {
+
+			if (attacker instanceof Player) {
+
+				if (defender instanceof Player) {
+
+					if (!((HumanEntity) attacker).getInventory()
+							.getItemInHand().equals(null)
+							|| ((HumanEntity) attacker).getInventory()
+									.getItemInHand().equals(Material.AIR)) {
+
+						if (((HumanEntity) attacker).getItemInHand()
+								.getItemMeta().hasLore()) {
+
+							if (((HumanEntity) attacker).getItemInHand()
+									.getItemMeta().getLore().get(0)
+									.equals("§r§7Blindness I")) {
+
+								((LivingEntity) defender)
+										.addPotionEffect(new PotionEffect(
+												PotionEffectType.BLINDNESS,
+												seconds1, amplifier1));
+							}
+
 						}
-						
+
 					}
-					
+
 				}
-				
+
 			}
-			
-			
+
+		} else {
+
 		}
-		
 	}
 
 }

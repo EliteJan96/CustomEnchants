@@ -34,8 +34,13 @@ import org.bukkit.potion.PotionEffectType;
 
 public class LeechHungerswordListener1 implements Listener {
 	
-	public Main plugin;
-	
+    Main plugin;
+    public LeechHungerswordListener1 (Main instance) {
+ 
+        plugin = instance;
+ 
+        }
+    
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent30(EntityDamageByEntityEvent event) {
 		

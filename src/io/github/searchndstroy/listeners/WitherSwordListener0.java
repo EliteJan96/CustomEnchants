@@ -33,7 +33,12 @@ import org.bukkit.potion.PotionEffectType;
 
 public class WitherSwordListener0 implements Listener {
 	
-	public Main plugin;
+	   Main plugin;
+	    public WitherSwordListener0 (Main instance) {
+	 
+	        plugin = instance;
+	 
+	        }
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent10(EntityDamageByEntityEvent event) {

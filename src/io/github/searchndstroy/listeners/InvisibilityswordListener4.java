@@ -34,7 +34,12 @@ import org.bukkit.potion.PotionEffectType;
 
 public class InvisibilityswordListener4 implements Listener {
 	
-	public Main plugin;
+    Main plugin;
+    public InvisibilityswordListener4 (Main instance) {
+ 
+        plugin = instance;
+ 
+        }
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {

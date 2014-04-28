@@ -33,7 +33,12 @@ import org.bukkit.potion.PotionEffectType;
 
 public class RegenSwordListener1 implements Listener {
 	
-	public Main plugin;
+	   Main plugin;
+	    public RegenSwordListener1 (Main instance) {
+	 
+	        plugin = instance;
+	 
+	        }
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent1(EntityDamageByEntityEvent event) {
