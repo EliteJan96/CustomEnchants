@@ -18,6 +18,7 @@
 package io.github.searchndstroy;
 
 import io.github.searchndstroy.commands.CustomEnchants;
+import io.github.searchndstroy.commands.ReloadCustomEnchants;
 import io.github.searchndstroy.listeners.BlindswordListener0;
 import io.github.searchndstroy.listeners.BlindswordListener1;
 import io.github.searchndstroy.listeners.BlindswordListener2;
@@ -139,6 +140,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 
 		getCommand("customenchants").setExecutor(new CustomEnchants(this));
+		getCommand("reloadcustomenchants").setExecutor(new ReloadCustomEnchants(this));
 
 		PluginManager Regensword0 = this.getServer().getPluginManager();
 		Regensword0.registerEvents(new RegenSwordListener0(this), this);
@@ -312,33 +314,32 @@ public class Main extends JavaPlugin {
 
 		PluginManager StrengthhelmetListener0 = this.getServer()
 				.getPluginManager();
-		StrengthhelmetListener0.registerEvents(new StrengthhelmetListener0(this),
-				this);
+		StrengthhelmetListener0.registerEvents(
+				new StrengthhelmetListener0(this), this);
 
 		PluginManager StrengthhelmetListener1 = this.getServer()
 				.getPluginManager();
-		StrengthhelmetListener1.registerEvents(new StrengthhelmetListener1(this),
-				this);
+		StrengthhelmetListener1.registerEvents(
+				new StrengthhelmetListener1(this), this);
 
 		PluginManager StrengthhelmetListener2 = this.getServer()
 				.getPluginManager();
-		StrengthhelmetListener2.registerEvents(new StrengthhelmetListener2(this),
-				this);
+		StrengthhelmetListener2.registerEvents(
+				new StrengthhelmetListener2(this), this);
 
 		PluginManager StrengthhelmetListener3 = this.getServer()
 				.getPluginManager();
-		StrengthhelmetListener3.registerEvents(new StrengthhelmetListener3(this),
-				this);
+		StrengthhelmetListener3.registerEvents(
+				new StrengthhelmetListener3(this), this);
 
 		PluginManager StrengthhelmetListener4 = this.getServer()
 				.getPluginManager();
-		StrengthhelmetListener4.registerEvents(new StrengthhelmetListener4(this),
-				this);
-		
+		StrengthhelmetListener4.registerEvents(
+				new StrengthhelmetListener4(this), this);
+
 		saveDefaultConfig();
 		
 		saveConfig();
-
 		getLogger().info("Plugin enabled. Have fun :D");
 
 	}
