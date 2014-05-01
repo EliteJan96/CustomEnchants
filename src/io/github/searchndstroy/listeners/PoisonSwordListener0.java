@@ -32,43 +32,52 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class PoisonSwordListener0 implements Listener {
-	
-	   Main plugin;
-	    public PoisonSwordListener0 (Main instance) {
-	 
-	        plugin = instance;
-	 
-	        }
-	
+
+	Main plugin;
+
+	public PoisonSwordListener0(Main instance) {
+
+		plugin = instance;
+
+	}
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent5(EntityDamageByEntityEvent event) {
-		
+
 		Entity attacker = (Entity) event.getDamager();
 		Entity defender = (Entity) event.getEntity();
 		int seconds0 = plugin.getCustomConfig().getInt("Poison.I.seconds");
-		int seconds = seconds0*20;
+		int seconds = seconds0 * 20;
 		int amplifier0 = plugin.getCustomConfig().getInt("Poison.I.amplifier");
-		int amplifier = amplifier0-1;
-		
-		if(attacker instanceof Player) {
+		int amplifier = amplifier0 - 1;
 
-			if(defender instanceof Player) {
-				
-				if (!((HumanEntity) attacker).getInventory().getItemInHand().equals(null) || ((HumanEntity) attacker).getInventory().getItemInHand().equals(Material.AIR)) {
-				
-				 if(((HumanEntity) attacker).getItemInHand().getItemMeta().hasLore()) {
-					
-					 if(((HumanEntity) attacker).getItemInHand().getItemMeta().getLore().get(0).equals("§r§7Poison I")) {
-						 
-						((LivingEntity) defender).addPotionEffect(new PotionEffect (PotionEffectType.POISON, seconds, amplifier));
-						
+		if (attacker instanceof Player) {
+
+			if (defender instanceof Player) {
+
+				if (!((HumanEntity) attacker).getInventory().getItemInHand()
+						.equals(null)
+						|| ((HumanEntity) attacker).getInventory()
+								.getItemInHand().equals(Material.AIR)) {
+
+					if (((HumanEntity) attacker).getItemInHand().getItemMeta()
+							.hasLore()) {
+
+						if (((HumanEntity) attacker).getItemInHand()
+								.getItemMeta().getLore()
+								.contains("§r§7Poison I")) {
+
+							((LivingEntity) defender)
+									.addPotionEffect(new PotionEffect(
+											PotionEffectType.POISON, seconds,
+											amplifier));
+
+						}
 					}
 				}
-				}
 			}
-			
+
 		}
 	}
 
 }
-

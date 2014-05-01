@@ -15,7 +15,6 @@
     along with CustomEnchants.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package io.github.searchndstroy.listeners;
 
 import io.github.searchndstroy.Main;
@@ -31,43 +30,51 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class StrengthhelmetListener4 implements Listener {
-	
-	   Main plugin;
-	    public StrengthhelmetListener4 (Main instance) {
-	 
-	        plugin = instance;
-	 
-	        }
-	
+
+	Main plugin;
+
+	public StrengthhelmetListener4(Main instance) {
+
+		plugin = instance;
+
+	}
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
-		
+
 		Entity attacker = (Entity) event.getDamager();
 		Entity defender = (Entity) event.getEntity();
 		int seconds0 = plugin.getCustomConfig().getInt("Strength.V.seconds");
-		int seconds = seconds0*20;
-		int amplifier0 = plugin.getCustomConfig().getInt("Strength.V.amplifier");
-		int amplifier = amplifier0-1;
-		
+		int seconds = seconds0 * 20;
+		int amplifier0 = plugin.getCustomConfig()
+				.getInt("Strength.V.amplifier");
+		int amplifier = amplifier0 - 1;
+
 		if (attacker instanceof Player) {
-			
-			if(defender instanceof Player) {
-				
+
+			if (defender instanceof Player) {
+
 				if (!(((HumanEntity) attacker).getInventory().getHelmet() != null)) {
-					
+
 				} else {
-					
-					if(((HumanEntity) attacker).getInventory().getHelmet().getItemMeta().hasLore()) {
-						
-						if (((HumanEntity) attacker).getInventory().getHelmet().getItemMeta().getLore().get(0).equals("§r§7Strength V")) {
-							
-							((HumanEntity) attacker).addPotionEffect(new PotionEffect (PotionEffectType.INCREASE_DAMAGE, seconds, amplifier));
-							
+
+					if (((HumanEntity) attacker).getInventory().getHelmet()
+							.getItemMeta().hasLore()) {
+
+						if (((HumanEntity) attacker).getInventory().getHelmet()
+								.getItemMeta().getLore()
+								.contains("§r§7Strength V")) {
+
+							((HumanEntity) attacker)
+									.addPotionEffect(new PotionEffect(
+											PotionEffectType.INCREASE_DAMAGE,
+											seconds, amplifier));
+
 						}
-						
+
 					}
 				}
-				
+
 			}
 		}
 

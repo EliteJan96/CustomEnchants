@@ -65,8 +65,8 @@ public class InvisibilityswordListener0 implements Listener {
 							.hasLore()) {
 
 						if (((HumanEntity) attacker).getItemInHand()
-								.getItemMeta().getLore().get(0)
-								.equals("§r§7Invisibility I")) {
+								.getItemMeta().getLore()
+								.contains("§r§7Invisibility I")) {
 
 							((LivingEntity) attacker)
 									.addPotionEffect(new PotionEffect(

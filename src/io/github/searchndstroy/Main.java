@@ -17,17 +17,68 @@
 
 package io.github.searchndstroy;
 
-import io.github.searchndstroy.listeners.*;
-import io.github.searchndstroy.commands.*;
-import io.github.searchndstroy.*;
+import io.github.searchndstroy.commands.CustomEnchants;
+import io.github.searchndstroy.listeners.BlindswordListener0;
+import io.github.searchndstroy.listeners.BlindswordListener1;
+import io.github.searchndstroy.listeners.BlindswordListener2;
+import io.github.searchndstroy.listeners.BlindswordListener3;
+import io.github.searchndstroy.listeners.BlindswordListener4;
+import io.github.searchndstroy.listeners.InvisibilityswordListener0;
+import io.github.searchndstroy.listeners.InvisibilityswordListener1;
+import io.github.searchndstroy.listeners.InvisibilityswordListener2;
+import io.github.searchndstroy.listeners.InvisibilityswordListener3;
+import io.github.searchndstroy.listeners.InvisibilityswordListener4;
+import io.github.searchndstroy.listeners.LeechHungerswordListener0;
+import io.github.searchndstroy.listeners.LeechHungerswordListener1;
+import io.github.searchndstroy.listeners.LeechHungerswordListener2;
+import io.github.searchndstroy.listeners.LeechHungerswordListener3;
+import io.github.searchndstroy.listeners.LeechHungerswordListener4;
+import io.github.searchndstroy.listeners.NauseaswordListener0;
+import io.github.searchndstroy.listeners.NauseaswordListener1;
+import io.github.searchndstroy.listeners.NauseaswordListener2;
+import io.github.searchndstroy.listeners.NauseaswordListener3;
+import io.github.searchndstroy.listeners.NauseaswordListener4;
+import io.github.searchndstroy.listeners.PoisonSwordListener0;
+import io.github.searchndstroy.listeners.PoisonSwordListener1;
+import io.github.searchndstroy.listeners.PoisonSwordListener2;
+import io.github.searchndstroy.listeners.PoisonSwordListener3;
+import io.github.searchndstroy.listeners.PoisonSwordListener4;
+import io.github.searchndstroy.listeners.RegenSwordListener0;
+import io.github.searchndstroy.listeners.RegenSwordListener1;
+import io.github.searchndstroy.listeners.RegenSwordListener2;
+import io.github.searchndstroy.listeners.RegenSwordListener3;
+import io.github.searchndstroy.listeners.RegenSwordListener4;
+import io.github.searchndstroy.listeners.ResistanceswordListener0;
+import io.github.searchndstroy.listeners.ResistanceswordListener1;
+import io.github.searchndstroy.listeners.ResistanceswordListener2;
+import io.github.searchndstroy.listeners.ResistanceswordListener3;
+import io.github.searchndstroy.listeners.ResistanceswordListener4;
+import io.github.searchndstroy.listeners.SlowswordListener0;
+import io.github.searchndstroy.listeners.SlowswordListener1;
+import io.github.searchndstroy.listeners.SlowswordListener2;
+import io.github.searchndstroy.listeners.SlowswordListener3;
+import io.github.searchndstroy.listeners.SlowswordListener4;
+import io.github.searchndstroy.listeners.SpeedbootsListener0;
+import io.github.searchndstroy.listeners.SpeedbootsListener1;
+import io.github.searchndstroy.listeners.SpeedbootsListener2;
+import io.github.searchndstroy.listeners.SpeedbootsListener3;
+import io.github.searchndstroy.listeners.SpeedbootsListener4;
+import io.github.searchndstroy.listeners.StrengthhelmetListener0;
+import io.github.searchndstroy.listeners.StrengthhelmetListener1;
+import io.github.searchndstroy.listeners.StrengthhelmetListener2;
+import io.github.searchndstroy.listeners.StrengthhelmetListener3;
+import io.github.searchndstroy.listeners.StrengthhelmetListener4;
+import io.github.searchndstroy.listeners.WitherSWordListener4;
+import io.github.searchndstroy.listeners.WitherSwordListener0;
+import io.github.searchndstroy.listeners.WitherSwordListener1;
+import io.github.searchndstroy.listeners.WitherSwordListener2;
+import io.github.searchndstroy.listeners.WitherSwordListener3;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
@@ -283,6 +334,10 @@ public class Main extends JavaPlugin {
 				.getPluginManager();
 		StrengthhelmetListener4.registerEvents(new StrengthhelmetListener4(this),
 				this);
+		
+		saveDefaultConfig();
+		
+		saveConfig();
 
 		getLogger().info("Plugin enabled. Have fun :D");
 

@@ -15,7 +15,6 @@
     along with CustomEnchants.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package io.github.searchndstroy.listeners;
 
 import io.github.searchndstroy.Main;
@@ -31,37 +30,43 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class SpeedbootsListener1 implements Listener {
-	
-	   Main plugin;
-	    public SpeedbootsListener1 (Main instance) {
-	 
-	        plugin = instance;
-	 
-	        }
-	
+
+	Main plugin;
+
+	public SpeedbootsListener1(Main instance) {
+
+		plugin = instance;
+
+	}
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerMoveEvent1(PlayerMoveEvent event) {
-		
+
 		Entity player = event.getPlayer();
 		int seconds0 = plugin.getCustomConfig().getInt("Speed.II.seconds");
-		int seconds = seconds0*20;
+		int seconds = seconds0 * 20;
 		int amplifier0 = plugin.getCustomConfig().getInt("Speed.II.amplifier");
-		int amplifier = amplifier0-1;
-		
-		if(player instanceof Player) {
-			
-			if(!(((HumanEntity) player).getInventory().getBoots() != null)) {
-				
+		int amplifier = amplifier0 - 1;
+
+		if (player instanceof Player) {
+
+			if (!(((HumanEntity) player).getInventory().getBoots() != null)) {
+
 			} else {
-			
-			if(((HumanEntity) player).getInventory().getBoots().getItemMeta().hasLore()) {
-				
-				if(((HumanEntity) player).getInventory().getBoots().getItemMeta().getLore().get(0).equals("§r§7Speed II")) {
-				
-				((HumanEntity) player).addPotionEffect(new PotionEffect (PotionEffectType.SPEED, seconds, amplifier));
-				
-			    }
-			}
+
+				if (((HumanEntity) player).getInventory().getBoots()
+						.getItemMeta().hasLore()) {
+
+					if (((HumanEntity) player).getInventory().getBoots()
+							.getItemMeta().getLore().contains("§r§7Speed II")) {
+
+						((HumanEntity) player)
+								.addPotionEffect(new PotionEffect(
+										PotionEffectType.SPEED, seconds,
+										amplifier));
+
+					}
+				}
 			}
 		}
 	}

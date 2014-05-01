@@ -32,40 +32,52 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class RegenSwordListener0 implements Listener {
-	
-	   Main plugin;
-	    public RegenSwordListener0 (Main instance) {
-	 
-	        plugin = instance;
-	 
-	        }
-	
+
+	Main plugin;
+
+	public RegenSwordListener0(Main instance) {
+
+		plugin = instance;
+
+	}
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent0(EntityDamageByEntityEvent event) {
-	    
+
 		Entity attacker = (Entity) event.getDamager();
 		Entity defender = (Entity) event.getEntity();
 		int seconds0 = plugin.getCustomConfig().getInt("Regen.I.seconds");
-		int seconds = seconds0*20;
+		int seconds = seconds0 * 20;
 		int amplifier0 = plugin.getCustomConfig().getInt("Regen.I.amplifier");
-		int amplifier = amplifier0-1;
-        
-        if(attacker instanceof Player) {
-			
-        	if(defender instanceof Player) {
-        		
-				if (!((HumanEntity) attacker).getInventory().getItemInHand().equals(null) || ((HumanEntity) attacker).getInventory().getItemInHand().equals(Material.AIR)) {
+		int amplifier = amplifier0 - 1;
 
-	     		if(((HumanEntity) attacker).getItemInHand().getItemMeta().hasLore()) {
-	                
-	     			if(((HumanEntity) attacker).getItemInHand().getItemMeta().getLore().get(0).equals("§r§7Regen I")) {
-	     				
-	            		((LivingEntity) attacker).addPotionEffect(new PotionEffect (PotionEffectType.REGENERATION, seconds, amplifier));
-	            			
-	            	}
-	            }
-        		}
-	     	}
+		if (attacker instanceof Player) {
+
+			System.out.println(seconds);
+
+			if (defender instanceof Player) {
+
+				if (!((HumanEntity) attacker).getInventory().getItemInHand()
+						.equals(null)
+						|| ((HumanEntity) attacker).getInventory()
+								.getItemInHand().equals(Material.AIR)) {
+
+					if (((HumanEntity) attacker).getItemInHand().getItemMeta()
+							.hasLore()) {
+
+						if (((HumanEntity) attacker).getItemInHand()
+								.getItemMeta().getLore().get(0)
+								.equals("§r§7Regen I")) {
+
+							((LivingEntity) attacker)
+									.addPotionEffect(new PotionEffect(
+											PotionEffectType.REGENERATION,
+											seconds, amplifier));
+
+						}
+					}
+				}
+			}
 		}
 	}
 }

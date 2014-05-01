@@ -63,8 +63,8 @@ public class BlindswordListener4 implements Listener {
 							.hasLore()) {
 
 						if (((HumanEntity) attacker).getItemInHand()
-								.getItemMeta().getLore().get(0)
-								.equals("§r§7Blindness V")) {
+								.getItemMeta().getLore()
+								.contains("§r§7Blindness V")) {
 
 							((LivingEntity) defender)
 									.addPotionEffect(new PotionEffect(

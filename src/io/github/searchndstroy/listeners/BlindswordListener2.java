@@ -33,12 +33,13 @@ import org.bukkit.potion.PotionEffectType;
 
 public class BlindswordListener2 implements Listener {
 
-    Main plugin;
-    public BlindswordListener2 (Main instance) {
- 
-        plugin = instance;
- 
-        }
+	Main plugin;
+
+	public BlindswordListener2(Main instance) {
+
+		plugin = instance;
+
+	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent21(EntityDamageByEntityEvent event) {
@@ -63,8 +64,8 @@ public class BlindswordListener2 implements Listener {
 							.hasLore()) {
 
 						if (((HumanEntity) attacker).getItemInHand()
-								.getItemMeta().getLore().get(0)
-								.equals("§r§7Blindness III")) {
+								.getItemMeta().getLore()
+								.contains("§r§7Blindness III")) {
 
 							((LivingEntity) defender)
 									.addPotionEffect(new PotionEffect(

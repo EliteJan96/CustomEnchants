@@ -28,19 +28,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class BlindswordListener1 implements Listener {
 
-    Main plugin;
-    public BlindswordListener1 (Main instance) {
- 
-        plugin = instance;
- 
-        }
+	Main plugin;
+
+	public BlindswordListener1(Main instance) {
+
+		plugin = instance;
+
+	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent20(EntityDamageByEntityEvent event) {
@@ -65,8 +64,8 @@ public class BlindswordListener1 implements Listener {
 							.hasLore()) {
 
 						if (((HumanEntity) attacker).getItemInHand()
-								.getItemMeta().getLore().get(0)
-								.equals("§r§7Blindness II")) {
+								.getItemMeta().getLore()
+								.contains("§r§7Blindness II")) {
 
 							((LivingEntity) defender)
 									.addPotionEffect(new PotionEffect(
@@ -83,5 +82,4 @@ public class BlindswordListener1 implements Listener {
 		}
 
 	}
-
 }

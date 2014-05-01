@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,320 +15,113 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class CustomEnchants implements CommandExecutor {
-	
-    Main plugin;
-    public CustomEnchants (Main instance) {
- 
-        plugin = instance;
- 
-        }
+
+	Main plugin;
+
+	public CustomEnchants(Main instance) {
+
+		plugin = instance;
+
+	}
+
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String label,
+	public boolean onCommand(CommandSender sender, Command cmd, String cmdlabel,
 			String[] args) {
-		
-		if (label.equalsIgnoreCase("ce") || label.equalsIgnoreCase("customenchants")) {
+
+		if (!(sender instanceof Player)) {
+
+			sender.sendMessage("You can only run this command as a player!");
+
+		} else {
 			
-			if (!(sender instanceof Player)) {
+			String usage = ChatColor.RED + "/customenchants enchant <enchantment name> <tier>";
+			
+			if (args.length <= 2) {
 				
-				sender.sendMessage("Please run this command as a logged-in user!");
-				int i = this.plugin.getCustomConfig().getInt("Regen.I.seconds");
-				System.out.println(i);
+				sender.sendMessage("Please use three arguments, not " + args.length);
+				sender.sendMessage(usage);
+				return false;
+			}
+			
+			if (args.length > 3) {
 				
-			} else {
+				sender.sendMessage("Please use three arguments, not " + args.length);
+				sender.sendMessage(usage);
+				return false;
+			}
+			
+			Player player = (Player) sender;
+			ItemStack iteminhand = player.getInventory().getItemInHand();
+			ItemMeta iteminhandim = iteminhand.getItemMeta();
+			
+			List<String> regen = new ArrayList<String>();
+			regen.add("§r§7Regen I");
+			regen.add("§r§7Regen II");
+			regen.add("§r§7Regen III");
+			regen.add("§r§7Regen IV");
+			regen.add("§r§7Regen V");
+			List<String> wither = new ArrayList<String>();
+			wither.add("§r§7Wither I");
+			wither.add("§r§7Wither II");
+			wither.add("§r§7Wither III");
+			wither.add("§r§7Wither IV");
+			wither.add("§r§7Wither V");
+			
+			if (iteminhand.getType() == null || iteminhand.getType() == Material.AIR) {
 				
-				Player player = (Player) sender;
+				sender.sendMessage(ChatColor.RED + "You have to have a valid item in your hand!");
+				return false;
 				
-				if (args.length == 0) {
-					
-					sender.sendMessage(ChatColor.RED + "Please use three arguments, not zero!");
-					sender.sendMessage(ChatColor.RED + "Usage: /ce enchant <enchantname> <tier>");
-					
-					return false;
-				}
+			}
+			
+			if (cmdlabel.equalsIgnoreCase("customenchants") || cmdlabel.equalsIgnoreCase("ce")) {
 				
-				if (args.length == 1 && args[0].equalsIgnoreCase("enchant")) {
-					
-					sender.sendMessage("Please use three arguments, not one!");
-					sender.sendMessage(ChatColor.RED + "Usage: /ce enchant <enchantname> <tier>");
-					
-					return false;
-				}
-				
-				if (args.length == 2) {
-					
-					sender.sendMessage(ChatColor.RED + "Please use three arguments, not two!");
-					sender.sendMessage(ChatColor.RED + "Usage: /ce enchant <enchantname> <tier>");
-					
-					return false;
-				}
-				
-				if (args.length > 3) {
-					
-					sender.sendMessage(ChatColor.RED + "Please use three arguments, not " + args.length + "!");
-					sender.sendMessage(ChatColor.RED + "Usage: /ce enchant <enchantname> <tier>");
-					
-					return false;
-				}
-				
-				ItemStack iteminhand = player.getInventory().getItemInHand();
-				
-				if (iteminhand != null) {
-					
-					if (args[0].equalsIgnoreCase("reload")) {
-						
-						plugin.reloadCustomConfig();
-						
-						return false;
-					} else if (args[0].equalsIgnoreCase("enchant")) {
+				if (args[0].equalsIgnoreCase("enchant")) {
 					
 					if (args[1].equalsIgnoreCase("regen")) {
 						
-						if (args[2].equalsIgnoreCase("1")) {
+						if (iteminhandim.hasLore()) {
 							
-							ItemMeta im0 = iteminhand.getItemMeta();
-							List<String> lore0 = new ArrayList<String>();
-							lore0.add("§r§7Regen I");
-							if (im0.hasLore()) {
+							if (iteminhandim.getLore().contains("Regen")) {
 								
-								if (im0.getLore().contains("Regen")) {
-									
-								} else {
+								System.out.println("derp2");
 								
-								lore0.addAll(im0.getLore());
-								im0.setLore(lore0);
-								iteminhand.setItemMeta(im0);
+								sender.sendMessage(ChatColor.RED + "You cannot have the same enchantment twice on a item!");
 								
 								return false;
 							}
 							
-							return false;
-						} else if (args[2].equalsIgnoreCase("2")) {
+						}
+						
+						//Start testing for tier input
+						
+						if (args[2].equalsIgnoreCase("1")) {
 							
-							ItemMeta im1 = iteminhand.getItemMeta();
-							List<String> lore1 = new ArrayList<String>();
-							lore1.add("§r§7Regen II");
-							if (im1.hasLore()) {
-								
-								lore1.addAll(im1.getLore());
-								im1.setLore(lore1);
-								iteminhand.setItemMeta(im1);
-								
-								return false;
+							if (iteminhandim.hasLore() == true) {
+						
+							ItemMeta thisitem = iteminhand.getItemMeta();
+							
+							List<String> derp = iteminhandim.getLore();
+							
+							derp.add("§r§7Regen I");
+							
+							thisitem.setLore(derp);
+							
+							iteminhand.setItemMeta(thisitem);
+							
+							sender.sendMessage(ChatColor.GREEN + "Successfully enchanted ur item hoe");
 							} else {
 								
-								im1.setLore(lore1);
-								iteminhand.setItemMeta(im1);
-							}
+								List<String> derp = new ArrayList<String>();
+								
+								derp.add("§r§7Regen I");
+								derp.add("§r§7Wither I");
+								
+								iteminhandim.setLore(derp);
+								
+								iteminhand.setItemMeta(iteminhandim);
 							
-							return false;
-						} else if (args[2].equalsIgnoreCase("3")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("4")) {
-							
-							return false;
-						} else if (args[3].equalsIgnoreCase("5")) {
-							
-							return false;
 						}
-						
-						return false;
-					} else if (args[1].equalsIgnoreCase("poison")) {
-						
-						if (args[2].equalsIgnoreCase("1")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("2")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("3")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("4")) {
-							
-							return false;
-						} else if (args[3].equalsIgnoreCase("5")) {
-							
-							return false;
-						}
-						
-						return false;
-					} else if (args[1].equalsIgnoreCase("wither")) {
-						
-						if (args[2].equalsIgnoreCase("1")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("2")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("3")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("4")) {
-							
-							return false;
-						} else if (args[3].equalsIgnoreCase("5")) {
-							
-							return false;
-						}
-						
-						return false;
-					} else if (args[1].equalsIgnoreCase("blind")) {
-						
-						if (args[2].equalsIgnoreCase("1")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("2")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("3")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("4")) {
-							
-							return false;
-						} else if (args[3].equalsIgnoreCase("5")) {
-							
-							return false;
-						}
-						
-						return false;
-					} else if (args[1].equalsIgnoreCase("leechhunger")) {
-						
-						if (args[2].equalsIgnoreCase("1")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("2")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("3")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("4")) {
-							
-							return false;
-						} else if (args[3].equalsIgnoreCase("5")) {
-							
-							return false;
-						}
-						
-						return false;
-					} else if (args[1].equalsIgnoreCase("nausea")) {
-						
-						if (args[2].equalsIgnoreCase("1")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("2")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("3")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("4")) {
-							
-							return false;
-						} else if (args[3].equalsIgnoreCase("5")) {
-							
-							return false;
-						}
-						
-						return false;
-					} else if (args[1].equalsIgnoreCase("resistance")) {
-						
-						if (args[2].equalsIgnoreCase("1")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("2")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("3")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("4")) {
-							
-							return false;
-						} else if (args[3].equalsIgnoreCase("5")) {
-							
-							return false;
-						}
-						
-						return false;
-					} else if (args[1].equalsIgnoreCase("strength")) {
-						
-						if (args[2].equalsIgnoreCase("1")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("2")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("3")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("4")) {
-							
-							return false;
-						} else if (args[3].equalsIgnoreCase("5")) {
-							
-							return false;
-						}
-						
-						return false;
-					} else if (args[1].equalsIgnoreCase("slow")) {
-						
-						if (args[2].equalsIgnoreCase("1")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("2")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("3")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("4")) {
-							
-							return false;
-						} else if (args[3].equalsIgnoreCase("5")) {
-							
-							return false;
-						}
-						
-						return false;
-					} else if (args[1].equalsIgnoreCase("speed")) {
-						
-						if (args[2].equalsIgnoreCase("1")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("2")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("3")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("4")) {
-							
-							return false;
-						} else if (args[3].equalsIgnoreCase("5")) {
-							
-							return false;
-						}
-						
-						return false;
-					} else if (args[1].equalsIgnoreCase("invisibility")) {
-						
-						if (args[2].equalsIgnoreCase("1")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("2")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("3")) {
-							
-							return false;
-						} else if (args[2].equalsIgnoreCase("4")) {
-							
-							return false;
-						} else if (args[3].equalsIgnoreCase("5")) {
-							
 							return false;
 						}
 						
@@ -336,23 +130,13 @@ public class CustomEnchants implements CommandExecutor {
 					
 					return false;
 				}
-			     return false;
-				} else {
-					
-					sender.sendMessage(ChatColor.RED + "Have a valid item in your hand!");
-					
-				}
 				
 				return false;
 			}
 			
-			return false;
+
 		}
-		
-		
-		
-		}
-		
-				return false;
-	} // End of onCommand
-} // End of file
+
+		return false;
+	}
+}

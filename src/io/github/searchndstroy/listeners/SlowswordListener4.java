@@ -32,42 +32,53 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class SlowswordListener4 implements Listener {
-	
-	   Main plugin;
-	    public SlowswordListener4 (Main instance) {
-	 
-	        plugin = instance;
-	 
-	        }
-	
+
+	Main plugin;
+
+	public SlowswordListener4(Main instance) {
+
+		plugin = instance;
+
+	}
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageByEntityEvent18(EntityDamageByEntityEvent event) {
-		
+
 		Entity attacker = (Entity) event.getDamager();
 		Entity defender = (Entity) event.getEntity();
 		int seconds0 = plugin.getCustomConfig().getInt("Slow.V.seconds");
-		int seconds = seconds0*20;
+		int seconds = seconds0 * 20;
 		int amplifier0 = plugin.getCustomConfig().getInt("Slow.V.amplifier");
-		int amplifier = amplifier0-1;
-		
-		if(attacker instanceof Player) {
-			
-			if(defender instanceof Player) {
-				
-				if (!((HumanEntity) attacker).getInventory().getItemInHand().equals(null) || ((HumanEntity) attacker).getInventory().getItemInHand().equals(Material.AIR)) {
-				
-			    	if(((HumanEntity) attacker).getItemInHand().getItemMeta().hasLore()) {
-					
-				    	if(((HumanEntity) attacker).getItemInHand().getItemMeta().getLore().get(0).equals("§r§7Slowness V")) {
-						
-				     		((LivingEntity) defender).addPotionEffect(new PotionEffect (PotionEffectType.SLOW, seconds, amplifier)); {
-							
+		int amplifier = amplifier0 - 1;
+
+		if (attacker instanceof Player) {
+
+			if (defender instanceof Player) {
+
+				if (!((HumanEntity) attacker).getInventory().getItemInHand()
+						.equals(null)
+						|| ((HumanEntity) attacker).getInventory()
+								.getItemInHand().equals(Material.AIR)) {
+
+					if (((HumanEntity) attacker).getItemInHand().getItemMeta()
+							.hasLore()) {
+
+						if (((HumanEntity) attacker).getItemInHand()
+								.getItemMeta().getLore()
+								.contains("§r§7Slowness V")) {
+
+							((LivingEntity) defender)
+									.addPotionEffect(new PotionEffect(
+											PotionEffectType.SLOW, seconds,
+											amplifier));
+							{
+
+							}
 						}
 					}
 				}
 			}
 		}
-	}
 	}
 
 }

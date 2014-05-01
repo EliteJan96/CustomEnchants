@@ -7,8 +7,6 @@ permissions:
         description: Gives access to all customenchant commands
         children:
             customenchants.customenchants: true
-            customenchants.enchant: true
-            customenchants.reload: true
 commands:
    customenchants:
       aliases: [ce]
