@@ -54,27 +54,12 @@ public class CustomEnchants implements CommandExecutor {
 			ItemStack iteminhand = player.getInventory().getItemInHand();
 			ItemMeta iteminhandim = iteminhand.getItemMeta();
 			
-			List<String> regen = new ArrayList<String>();
-			regen.add("§r§7Regen I");
-			regen.add("§r§7Regen II");
-			regen.add("§r§7Regen III");
-			regen.add("§r§7Regen IV");
-			regen.add("§r§7Regen V");
-			List<String> wither = new ArrayList<String>();
-			wither.add("§r§7Wither I");
-			wither.add("§r§7Wither II");
-			wither.add("§r§7Wither III");
-			wither.add("§r§7Wither IV");
-			wither.add("§r§7Wither V");
-			
 			if (iteminhand.getType() == null || iteminhand.getType() == Material.AIR) {
 				
 				sender.sendMessage(ChatColor.RED + "You have to have a valid item in your hand!");
 				return false;
 				
-			}
-			
-			if (cmdlabel.equalsIgnoreCase("customenchants") || cmdlabel.equalsIgnoreCase("ce")) {
+			} else if (cmdlabel.equalsIgnoreCase("customenchants") || cmdlabel.equalsIgnoreCase("ce")) {
 				
 				if (args[0].equalsIgnoreCase("enchant")) {
 					
@@ -82,20 +67,16 @@ public class CustomEnchants implements CommandExecutor {
 						
 						if (iteminhandim.hasLore()) {
 							
-							if (iteminhandim.getLore().contains("Regen")) {
-								
-								System.out.println("derp2");
+							if (iteminhandim.getLore().contains("§r§7Regen ")) {
 								
 								sender.sendMessage(ChatColor.RED + "You cannot have the same enchantment twice on a item!");
 								
 								return false;
 							}
 							
-						}
-						
-						//Start testing for tier input
-						
-						if (args[2].equalsIgnoreCase("1")) {
+							//Start testing for input here(kinda)
+							
+						} else if (args[2].equalsIgnoreCase("1")) {
 							
 							if (iteminhandim.hasLore() == true) {
 						
@@ -109,13 +90,12 @@ public class CustomEnchants implements CommandExecutor {
 							
 							iteminhand.setItemMeta(thisitem);
 							
-							sender.sendMessage(ChatColor.GREEN + "Successfully enchanted ur item hoe");
+							sender.sendMessage(ChatColor.GREEN + "Successfully enchanted your item!");
 							} else {
 								
 								List<String> derp = new ArrayList<String>();
 								
 								derp.add("§r§7Regen I");
-								derp.add("§r§7Wither I");
 								
 								iteminhandim.setLore(derp);
 								
