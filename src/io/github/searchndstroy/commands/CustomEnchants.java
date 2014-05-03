@@ -110,11 +110,11 @@ public class CustomEnchants implements CommandExecutor {
 								sender.sendMessage(ChatColor.GREEN
 										+ "Successfully enchanted your item!");
 
-								List<String> derp = new ArrayList<String>();
+								List<String> lore = new ArrayList<String>();
 
-								derp.add("§r§7Regen I");
+								lore.add("§r§7Regen I");
 
-								iteminhandim.setLore(derp);
+								iteminhandim.setLore(lore);
 
 								iteminhand.setItemMeta(iteminhandim);
 
@@ -143,11 +143,11 @@ public class CustomEnchants implements CommandExecutor {
 
 							} else {
 
-								List<String> derp = new ArrayList<String>();
+								List<String> lore = new ArrayList<String>();
 
-								derp.add("§r§7Regen II");
+								lore.add("§r§7Regen II");
 
-								iteminhandim.setLore(derp);
+								iteminhandim.setLore(lore);
 
 								iteminhand.setItemMeta(iteminhandim);
 
@@ -179,11 +179,11 @@ public class CustomEnchants implements CommandExecutor {
 
 							} else {
 
-								List<String> derp = new ArrayList<String>();
+								List<String> lore = new ArrayList<String>();
 
-								derp.add("§r§7Regen III");
+								lore.add("§r§7Regen III");
 
-								iteminhandim.setLore(derp);
+								iteminhandim.setLore(lore);
 
 								iteminhand.setItemMeta(iteminhandim);
 
@@ -193,6 +193,286 @@ public class CustomEnchants implements CommandExecutor {
 								return true;
 
 							}
+
+						}
+
+						if (args[2].equalsIgnoreCase("4")) {
+
+							if (iteminhandim.hasLore() == true) {
+
+								List<String> lore = iteminhandim.getLore();
+
+								lore.add("§r§7Regen IV");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								sender.sendMessage(ChatColor.GREEN
+										+ "Successfully enchanted your item!");
+
+							} else {
+
+								List<String> lore = new ArrayList<String>();
+
+								lore.add("§r§7Regen IV");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								sender.sendMessage(ChatColor.GREEN
+										+ "Successfully enchanted your item");
+
+							}
+
+						}
+
+						if (args[2].equalsIgnoreCase("5")) {
+
+							if (iteminhandim.hasLore() == true) {
+
+								List<String> lore = iteminhandim.getLore();
+
+								lore.add("§r§7Regen V");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								sender.sendMessage(ChatColor.GREEN
+										+ "Successfully enchanted your item!");
+
+							} else {
+
+								List<String> lore = new ArrayList<String>();
+
+								lore.add("§r§7Regen V");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								sender.sendMessage(ChatColor.GREEN
+										+ "Successfully enchanted your item");
+
+							}
+
+						} else {
+
+							sender.sendMessage(ChatColor.RED
+									+ "Please put in a number from 1-5! Not "
+									+ args[2]);
+
+						}
+
+						return false; // Not here
+					}
+
+					if (args[1].equalsIgnoreCase("wither")) {
+
+						List<String> derp01 = iteminhandim.getLore();
+
+						String wither = "§r§7Wither";
+						String wither1 = wither + " I";
+						String wither2 = wither + " II";
+						String wither3 = wither + " III";
+						String wither4 = wither + " IV";
+						String wither5 = wither + " V";
+
+						if (iteminhandim.hasLore()) {
+
+							if (derp01.contains(wither1)
+									|| derp01.contains(wither2)
+									|| derp01.contains(wither3)
+									|| derp01.contains(wither4)
+									|| derp01.contains(wither5)) {
+
+								sender.sendMessage(ChatColor.RED
+										+ "You cannot have the same enchantment twice on a item!");
+
+								return false;
+							}
+
+							// Start testing for input here(kinda)
+
+						}
+
+						if (args[2].equalsIgnoreCase("1")) {
+
+							sender.sendMessage(ChatColor.GREEN
+									+ "Successfully enchanted your item!");
+
+							if (iteminhandim.hasLore() == true) {
+
+								List<String> lore = iteminhandim.getLore();
+
+								lore.add("§r§7Wither I");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								return true;
+
+							} else {
+
+								sender.sendMessage(ChatColor.GREEN
+										+ "Successfully enchanted your item!");
+
+								List<String> lore = new ArrayList<String>();
+
+								lore.add("§r§7Wither I");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								return true;
+
+							}
+
+						}
+
+						if (args[2].equalsIgnoreCase("2")) {
+
+							if (iteminhandim.hasLore() == true) {
+
+								List<String> lore = iteminhandim.getLore();
+
+								lore.add("§r§7Wither II");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								sender.sendMessage(ChatColor.GREEN
+										+ "Successfully enchanted your item!");
+
+								return true;
+
+							} else {
+
+								List<String> lore = new ArrayList<String>();
+
+								lore.add("§r§7Wither II");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								sender.sendMessage(ChatColor.GREEN
+										+ "Successfully enchanted your item!");
+
+								return true;
+
+							}
+
+						}
+
+						if (args[2].equalsIgnoreCase("3")) {
+
+							if (iteminhandim.hasLore() == true) {
+
+								List<String> lore = iteminhandim.getLore();
+
+								lore.add("§r§7Wither III");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								sender.sendMessage(ChatColor.GREEN
+										+ "Successfully enchanted your item!");
+
+								return true;
+
+							} else {
+
+								List<String> lore = new ArrayList<String>();
+
+								lore.add("§r§7Wither III");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								sender.sendMessage(ChatColor.GREEN
+										+ "Successfully enchanted your item!");
+
+								return true;
+
+							}
+
+						}
+
+						if (args[2].equalsIgnoreCase("4")) {
+
+							if (iteminhandim.hasLore() == true) {
+
+								List<String> lore = iteminhandim.getLore();
+
+								lore.add("§r§7Wither IV");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								sender.sendMessage(ChatColor.GREEN
+										+ "Successfully enchanted your item!");
+
+							} else {
+
+								List<String> lore = new ArrayList<String>();
+
+								lore.add("§r§7Wither IV");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								sender.sendMessage(ChatColor.GREEN
+										+ "Successfully enchanted your item");
+
+							}
+
+						}
+
+						if (args[2].equalsIgnoreCase("5")) {
+
+							if (iteminhandim.hasLore() == true) {
+
+								List<String> lore = iteminhandim.getLore();
+
+								lore.add("§r§7Wither V");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								sender.sendMessage(ChatColor.GREEN
+										+ "Successfully enchanted your item!");
+
+							} else {
+
+								List<String> lore = new ArrayList<String>();
+
+								lore.add("§r§7Wither V");
+
+								iteminhandim.setLore(lore);
+
+								iteminhand.setItemMeta(iteminhandim);
+
+								sender.sendMessage(ChatColor.GREEN
+										+ "Successfully enchanted your item");
+
+							}
+
+						} else {
+
+							sender.sendMessage(ChatColor.RED
+									+ "Please put in a number from 1-5! Not "
+									+ args[2]);
 
 						}
 
