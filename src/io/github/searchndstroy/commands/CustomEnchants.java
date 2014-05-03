@@ -1,7 +1,5 @@
 package io.github.searchndstroy.commands;
 
-import io.github.searchndstroy.Main;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,14 +13,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class CustomEnchants implements CommandExecutor {
-
-	Main plugin;
-
-	public CustomEnchants(Main instance) {
-
-		plugin = instance;
-
-	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdlabel,
@@ -65,29 +55,29 @@ public class CustomEnchants implements CommandExecutor {
 					
 					if (args[1].equalsIgnoreCase("regen")) {
 						
-						//List<String> derp01 = iteminhandim.getLore();
+						List<String> derp01 = iteminhandim.getLore();
 						
-						//List<String> regen = new ArrayList<String>();
+						List<String> regen = new ArrayList<String>();
 						
-						//regen.add("§r§7Regen I");
-						//regen.add("§r§7Regen II");
-						//regen.add("§r§7Regen III");
-						//regen.add("§r§7Regen IV");
-						//regen.add("§r§7Regen V");
+						regen.add("§r§7Regen I");
+						regen.add("§r§7Regen II");
+						regen.add("§r§7Regen III");
+						regen.add("§r§7Regen IV");
+						regen.add("§r§7Regen V");
 						
 						
-						//if (iteminhandim.hasLore()) {
+						if (iteminhandim.hasLore()) {
 							
-							//if (derp01.contains(regen)) {
+							if (derp01.contains(regen)) {
 								
-							//	sender.sendMessage(ChatColor.RED + "You cannot have the same enchantment twice on a item!");
+								sender.sendMessage(ChatColor.RED + "You cannot have the same enchantment twice on a item!");
 								
-								//return false;
-							//}
+								return false;
+							}
 							
 							//Start testing for input here(kinda)
 							
-						//}
+						}
 						
 						if (args[2].equalsIgnoreCase("1")) {
 							

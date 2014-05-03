@@ -139,7 +139,7 @@ public class Main extends JavaPlugin {
 
 	public void onEnable() {
 
-		getCommand("customenchants").setExecutor(new CustomEnchants(this));
+		getCommand("customenchants").setExecutor(new CustomEnchants());
 		getCommand("reloadcustomenchants").setExecutor(new ReloadCustomEnchants(this));
 
 		PluginManager Regensword0 = this.getServer().getPluginManager();
