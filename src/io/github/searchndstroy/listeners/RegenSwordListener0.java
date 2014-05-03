@@ -53,8 +53,6 @@ public class RegenSwordListener0 implements Listener {
 
 		if (attacker instanceof Player) {
 
-			System.out.println(seconds);
-
 			if (defender instanceof Player) {
 
 				if (!((HumanEntity) attacker).getInventory().getItemInHand()
