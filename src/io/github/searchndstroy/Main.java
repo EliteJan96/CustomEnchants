@@ -86,7 +86,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
-
+	
+	public static FileConfiguration config;
 	private FileConfiguration EnchantConfig;
 	private File EnchantConfigFile;
 
@@ -138,9 +139,12 @@ public class Main extends JavaPlugin {
 	}
 
 	public void onEnable() {
+		
+		config = getCustomConfig();
 
 		getCommand("customenchants").setExecutor(new CustomEnchants());
 		getCommand("reloadcustomenchants").setExecutor(new ReloadCustomEnchants(this));
+		getCommand("enchantinformation").setExecutor(new EnchantInformation(this));
 
 		PluginManager Regensword0 = this.getServer().getPluginManager();
 		Regensword0.registerEvents(new RegenSwordListener0(this), this);
