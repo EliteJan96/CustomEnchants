@@ -43,7 +43,7 @@ public class EnchantInformation implements CommandExecutor {
 	}
 
 	private void InvGUI(Player player) {
-		
+
 		FileConfiguration config = Main.config;
 
 		Inventory inv = Bukkit.createInventory(null, 9, ChatColor.AQUA
@@ -54,15 +54,21 @@ public class EnchantInformation implements CommandExecutor {
 
 		BookMeta meta0 = (BookMeta) book0.getItemMeta();
 		BookMeta meta1 = (BookMeta) book1.getItemMeta();
-		
+
 		int seconds0 = config.getInt("Regen.I.seconds");
 		int amplifier0 = config.getInt("Regen.I.amplifier");
-		
+		int seconds1 = config.getInt("Regen.II.seconds");
+		int amplifier1 = config.getInt("Regen.II.amplifier");
+
 		meta0.setTitle(ChatColor.RED + "Regen Enchant");
+		meta1.setTitle(ChatColor.GREEN + "Poison Enchant");
+		
+		meta1.setAuthor("searchndstroy");
 		meta0.setAuthor("searchndstroy");
-		
+
 		List<String> pages0 = new ArrayList<String>();
-		
+		List<String> pages1 = new ArrayList<String>();
+
 		pages0.set(1, "Introduction");
 		pages0.set(2, "Tier 1");
 		pages0.set(3, "Tier 2");
@@ -70,15 +76,30 @@ public class EnchantInformation implements CommandExecutor {
 		pages0.set(5, "Tier 4");
 		pages0.set(6, "Tier 6");
 		
+		pages1.set(1, "Introduction");
+		pages1.set(2, "Tier 1");
+		pages1.set(3, "Tier 2");
+		pages1.set(4, "Tier 3");
+		pages1.set(5, "Tier 4");
+		pages1.set(6, "Tier 6");
+
 		pages0.add("This enchantment gives you health when you hit a player. "
 				+ "It will not give you health if you attack a mob. "
 				+ "There are five tiers to this enchantment.");
-		pages0.add("The duration of this effect is " + seconds0 + ". Or " + seconds0 * 20
-				+ " ticks." + " Also the amplifier of the effect is " + amplifier0);
+		pages0.add("The duration of this effect is " + seconds0 + ". Or "
+				+ seconds0 * 20 + " ticks."
+				+ " Also the amplifier of the effect is " + amplifier0);
+		pages0.add("The duration of this effect is " + seconds1 + ". Or "
+				+ seconds1 * 20 + " ticks."
+				+ " Also the amplifier of the effect is " + amplifier1);
+
 		meta0.setPages(pages0);
+
 		book0.setItemMeta(meta0);
 
 		player.openInventory(inv);
+		
+		player.getInventory().addItem(book0);
 	}
 
 	@Override

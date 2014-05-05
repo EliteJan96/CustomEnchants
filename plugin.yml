@@ -9,6 +9,7 @@ permissions:
         children:
             customenchants.customenchants: true
             customenchants.reload: true
+            customenchants.enchantinformation: true
 commands:
    customenchants:
       aliases: [ce]
@@ -21,4 +22,10 @@ commands:
       description: Reloads customenchants config.
       usage:
       permission: customenchants.reload
+      permission-message: Permission denied.
+   enchantinformation:
+      aliases: [ei]
+      description: Opens up a inventory containing books explaining enchantments.
+      usage:
+      permission: customenchants.enchantinformation
       permission-message: Permission denied.
