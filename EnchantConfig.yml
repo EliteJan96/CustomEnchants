@@ -77,7 +77,7 @@ Leechhunger:
   amplifier:
    saturation: 1
    hunger: 4
- IIi:
+ III:
   seconds: 
    saturation: 0.3
    hunger: 4.5

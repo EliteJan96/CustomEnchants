@@ -1,4 +1,4 @@
-version: 1.4pre2
+version: 1.4
 main: io.github.searchndstroy.Main
 name: CustomEnchants
 auther: searchndstroy
@@ -28,4 +28,10 @@ commands:
       description: Opens up a inventory containing books explaining enchantments.
       usage:
       permission: customenchants.enchantinformation
+      permission-message: Permission denied.
+   savecustomenchants:
+      aliases: [sce]
+      description: Saves the customenchant config.
+      usage:
+      permission: customenchants.savecustomenchants
       permission-message: Permission denied.

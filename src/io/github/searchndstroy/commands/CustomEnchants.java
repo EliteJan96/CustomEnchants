@@ -271,7 +271,7 @@ public class CustomEnchants implements CommandExecutor {
 								iteminhand.setItemMeta(iteminhandim);
 
 								sender.sendMessage(ChatColor.GREEN
-										+ "Successfully enchanted your item");
+										+ "Successfully enchanted your item!");
 
 							}
 
@@ -481,7 +481,7 @@ public class CustomEnchants implements CommandExecutor {
 								iteminhand.setItemMeta(iteminhandim);
 
 								sender.sendMessage(ChatColor.GREEN
-										+ "Successfully enchanted your item");
+										+ "Successfully enchanted your item!");
 
 							}
 
@@ -691,7 +691,7 @@ public class CustomEnchants implements CommandExecutor {
 								iteminhand.setItemMeta(iteminhandim);
 
 								sender.sendMessage(ChatColor.GREEN
-										+ "Successfully enchanted your item");
+										+ "Successfully enchanted your item!");
 
 							}
 
@@ -744,7 +744,7 @@ public class CustomEnchants implements CommandExecutor {
 
 								List<String> lore = iteminhandim.getLore();
 
-								lore.add("§r§7Leechhunger I");
+								lore.add("§r§7LeechHunger I");
 
 								iteminhandim.setLore(lore);
 
@@ -759,7 +759,7 @@ public class CustomEnchants implements CommandExecutor {
 
 								List<String> lore = new ArrayList<String>();
 
-								lore.add("§r§Leechhunger I");
+								lore.add("§r§LeechHunger I");
 
 								iteminhandim.setLore(lore);
 
@@ -777,7 +777,7 @@ public class CustomEnchants implements CommandExecutor {
 
 								List<String> lore = iteminhandim.getLore();
 
-								lore.add("§r§7Leechhunger II");
+								lore.add("§r§7LeechHunger II");
 
 								iteminhandim.setLore(lore);
 
@@ -792,7 +792,7 @@ public class CustomEnchants implements CommandExecutor {
 
 								List<String> lore = new ArrayList<String>();
 
-								lore.add("§r§7Leechhunger II");
+								lore.add("§r§7LeechHunger II");
 
 								iteminhandim.setLore(lore);
 
@@ -813,7 +813,7 @@ public class CustomEnchants implements CommandExecutor {
 
 								List<String> lore = iteminhandim.getLore();
 
-								lore.add("§r§7Leechhunger III");
+								lore.add("§r§7LeechHunger III");
 
 								iteminhandim.setLore(lore);
 
@@ -828,7 +828,7 @@ public class CustomEnchants implements CommandExecutor {
 
 								List<String> lore = new ArrayList<String>();
 
-								lore.add("§r§7Leechhunger III");
+								lore.add("§r§7LeechHunger III");
 
 								iteminhandim.setLore(lore);
 
@@ -849,7 +849,7 @@ public class CustomEnchants implements CommandExecutor {
 
 								List<String> lore = iteminhandim.getLore();
 
-								lore.add("§r§7Leechhunger IV");
+								lore.add("§r§7LeechHunger IV");
 
 								iteminhandim.setLore(lore);
 
@@ -862,7 +862,7 @@ public class CustomEnchants implements CommandExecutor {
 
 								List<String> lore = new ArrayList<String>();
 
-								lore.add("§r§7Leechhunger IV");
+								lore.add("§r§7LeechHunger IV");
 
 								iteminhandim.setLore(lore);
 
@@ -881,7 +881,7 @@ public class CustomEnchants implements CommandExecutor {
 
 								List<String> lore = iteminhandim.getLore();
 
-								lore.add("§r§7Leechhunger V");
+								lore.add("§r§7LeechHunger V");
 
 								iteminhandim.setLore(lore);
 
@@ -894,14 +894,14 @@ public class CustomEnchants implements CommandExecutor {
 
 								List<String> lore = new ArrayList<String>();
 
-								lore.add("§r§7Leechhunger V");
+								lore.add("§r§7LeechHunger V");
 
 								iteminhandim.setLore(lore);
 
 								iteminhand.setItemMeta(iteminhandim);
 
 								sender.sendMessage(ChatColor.GREEN
-										+ "Successfully enchanted your item");
+										+ "Successfully enchanted your item!");
 
 							}
 
@@ -1111,7 +1111,7 @@ public class CustomEnchants implements CommandExecutor {
 								iteminhand.setItemMeta(iteminhandim);
 
 								sender.sendMessage(ChatColor.GREEN
-										+ "Successfully enchanted your item");
+										+ "Successfully enchanted your item!");
 
 							}
 
@@ -1321,7 +1321,7 @@ public class CustomEnchants implements CommandExecutor {
 								iteminhand.setItemMeta(iteminhandim);
 
 								sender.sendMessage(ChatColor.GREEN
-										+ "Successfully enchanted your item");
+										+ "Successfully enchanted your item!");
 
 							}
 
@@ -1531,7 +1531,7 @@ public class CustomEnchants implements CommandExecutor {
 								iteminhand.setItemMeta(iteminhandim);
 
 								sender.sendMessage(ChatColor.GREEN
-										+ "Successfully enchanted your item");
+										+ "Successfully enchanted your item!");
 
 							}
 
@@ -1709,7 +1709,7 @@ public class CustomEnchants implements CommandExecutor {
 								iteminhand.setItemMeta(iteminhandim);
 
 								sender.sendMessage(ChatColor.GREEN
-										+ "Successfully enchanted your item");
+										+ "Successfully enchanted your item!");
 
 							}
 
@@ -1919,7 +1919,7 @@ public class CustomEnchants implements CommandExecutor {
 								iteminhand.setItemMeta(iteminhandim);
 
 								sender.sendMessage(ChatColor.GREEN
-										+ "Successfully enchanted your item");
+										+ "Successfully enchanted your item!");
 
 							}
 
