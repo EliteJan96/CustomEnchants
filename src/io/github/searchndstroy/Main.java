@@ -18,6 +18,7 @@
 package io.github.searchndstroy;
 
 import io.github.searchndstroy.commands.CustomEnchants;
+import io.github.searchndstroy.commands.EnchantInformation;
 import io.github.searchndstroy.commands.ReloadCustomEnchants;
 import io.github.searchndstroy.listeners.BlindswordListener0;
 import io.github.searchndstroy.listeners.BlindswordListener1;
@@ -145,6 +146,8 @@ public class Main extends JavaPlugin {
 		getCommand("customenchants").setExecutor(new CustomEnchants());
 		getCommand("reloadcustomenchants").setExecutor(new ReloadCustomEnchants(this));
 		getCommand("enchantinformation").setExecutor(new EnchantInformation(this));
+		
+		getServer().getPluginManager().registerEvents(new EnchantInformation(this), this);
 
 		PluginManager Regensword0 = this.getServer().getPluginManager();
 		Regensword0.registerEvents(new RegenSwordListener0(this), this);

@@ -15,7 +15,9 @@
     along with CustomEnchants.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.searchndstroy;
+package io.github.searchndstroy.commands;
+
+import io.github.searchndstroy.Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +30,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
-public class EnchantInformation implements CommandExecutor {
+public class EnchantInformation implements CommandExecutor, Listener {
 
 	Main plugin;
 
@@ -60,9 +66,12 @@ public class EnchantInformation implements CommandExecutor {
 		int seconds1 = config.getInt("Regen.II.seconds");
 		int amplifier1 = config.getInt("Regen.II.amplifier");
 
+		meta0.setDisplayName("Enchantment: Regen");
+		meta1.setDisplayName("Enchantment: Poison");
+
 		meta0.setTitle(ChatColor.RED + "Regen Enchant");
 		meta1.setTitle(ChatColor.GREEN + "Poison Enchant");
-		
+
 		meta1.setAuthor("searchndstroy");
 		meta0.setAuthor("searchndstroy");
 
@@ -75,7 +84,7 @@ public class EnchantInformation implements CommandExecutor {
 		pages0.set(4, "Tier 3");
 		pages0.set(5, "Tier 4");
 		pages0.set(6, "Tier 6");
-		
+
 		pages1.set(1, "Introduction");
 		pages1.set(2, "Tier 1");
 		pages1.set(3, "Tier 2");
@@ -98,8 +107,45 @@ public class EnchantInformation implements CommandExecutor {
 		book0.setItemMeta(meta0);
 
 		player.openInventory(inv);
-		
+
 		player.getInventory().addItem(book0);
+	}
+
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	public void onInventoryClick(InventoryClickEvent e) {
+
+		if (!ChatColor.stripColor(e.getInventory().getName()).equalsIgnoreCase(
+				"Enchantment Information!"))
+			return;
+
+		Player player = (Player) e.getWhoClicked();
+		e.setCancelled(true);
+
+		if (e.getCurrentItem() == null
+				|| e.getCurrentItem().getType() == Material.AIR
+				|| !e.getCurrentItem().hasItemMeta()) {
+			player.closeInventory();
+			return;
+		}
+
+		ChatColor colourg = ChatColor.GREEN;
+		ChatColor colourr = ChatColor.RED;
+
+		switch (e.getCurrentItem().getItemMeta().getDisplayName()) {
+
+		case "Enchantment: Regen":
+
+			player.sendMessage(colourg + "Gave you the Regen book!");
+			player.closeInventory();
+			break;
+
+		default:
+
+			player.sendMessage(colourr + "Please click on a book!");
+			player.closeInventory();
+			break;
+		}
+
 	}
 
 	@Override
@@ -113,19 +159,27 @@ public class EnchantInformation implements CommandExecutor {
 			return false;
 		} else {
 
-			if (cmdlabel.equalsIgnoreCase("enchantinformation")
-					|| cmdlabel.equalsIgnoreCase("ei")) {
+			if (!(args.length == 0)) {
 
-				Player player = (Player) sender;
+				System.out.println("test");
 
-				InvGUI(player);
+				return false;
 
-				return true;
+			} else {
+
+				if (cmdlabel.equalsIgnoreCase("enchantinformation")
+						|| cmdlabel.equalsIgnoreCase("ei")) {
+
+					Player player = (Player) sender;
+
+					InvGUI(player);
+
+					return true;
+				}
 			}
+
+			return false;
 		}
-
-		return false;
-
 	}
 
 }
