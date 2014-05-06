@@ -99,7 +99,6 @@ public class EnchantInformation implements CommandExecutor, Listener {
 		pages0.add("The duration of this effect is " + seconds4 + ". Or "
 				+ seconds4 * 20 + " ticks."
 				+ " Also the amplifier of the effect is " + amplifier4);
-		
 
 		meta0.setPages(pages0);
 		meta1.setPages(pages1);
@@ -126,14 +125,15 @@ public class EnchantInformation implements CommandExecutor, Listener {
 
 			if (!(args.length == 0)) {
 
-				System.out.println("test");
-
 				return false;
 
 			} else {
 
 				if (cmdlabel.equalsIgnoreCase("enchantinformation")
 						|| cmdlabel.equalsIgnoreCase("ei")) {
+
+					sender.sendMessage("Please wait until the 1.5 update for this command to be fully added! "
+							+ "Thanks! For now heres a demo! :D");
 
 					Player player = (Player) sender;
 
