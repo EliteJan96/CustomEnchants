@@ -30,10 +30,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
@@ -65,6 +62,12 @@ public class EnchantInformation implements CommandExecutor, Listener {
 		int amplifier0 = config.getInt("Regen.I.amplifier");
 		int seconds1 = config.getInt("Regen.II.seconds");
 		int amplifier1 = config.getInt("Regen.II.amplifier");
+		int seconds2 = config.getInt("Regen.III.seconds");
+		int amplifier2 = config.getInt("Regen.III.amplifier");
+		int seconds3 = config.getInt("Regen.IV.seconds");
+		int amplifier3 = config.getInt("Regen.IV.amplifier");
+		int seconds4 = config.getInt("Regen.V.seconds");
+		int amplifier4 = config.getInt("Regen.V.amplifier");
 
 		meta0.setDisplayName("Enchantment: Regen");
 		meta1.setDisplayName("Enchantment: Poison");
@@ -78,20 +81,6 @@ public class EnchantInformation implements CommandExecutor, Listener {
 		List<String> pages0 = new ArrayList<String>();
 		List<String> pages1 = new ArrayList<String>();
 
-		pages0.set(1, "Introduction");
-		pages0.set(2, "Tier 1");
-		pages0.set(3, "Tier 2");
-		pages0.set(4, "Tier 3");
-		pages0.set(5, "Tier 4");
-		pages0.set(6, "Tier 6");
-
-		pages1.set(1, "Introduction");
-		pages1.set(2, "Tier 1");
-		pages1.set(3, "Tier 2");
-		pages1.set(4, "Tier 3");
-		pages1.set(5, "Tier 4");
-		pages1.set(6, "Tier 6");
-
 		pages0.add("This enchantment gives you health when you hit a player. "
 				+ "It will not give you health if you attack a mob. "
 				+ "There are five tiers to this enchantment.");
@@ -101,51 +90,27 @@ public class EnchantInformation implements CommandExecutor, Listener {
 		pages0.add("The duration of this effect is " + seconds1 + ". Or "
 				+ seconds1 * 20 + " ticks."
 				+ " Also the amplifier of the effect is " + amplifier1);
+		pages0.add("The duration of this effect is " + seconds2 + ". Or "
+				+ seconds2 * 20 + " ticks."
+				+ " Also the amplifier of the effect is " + amplifier2);
+		pages0.add("The duration of this effect is " + seconds3 + ". Or "
+				+ seconds3 * 20 + " ticks."
+				+ " Also the amplifier of the effect is " + amplifier3);
+		pages0.add("The duration of this effect is " + seconds4 + ". Or "
+				+ seconds4 * 20 + " ticks."
+				+ " Also the amplifier of the effect is " + amplifier4);
+		
 
 		meta0.setPages(pages0);
+		meta1.setPages(pages1);
 
 		book0.setItemMeta(meta0);
+		book1.setItemMeta(meta1);
+
+		inv.setItem(1, book0);
+		inv.setItem(2, book1);
 
 		player.openInventory(inv);
-
-		player.getInventory().addItem(book0);
-	}
-
-	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-	public void onInventoryClick(InventoryClickEvent e) {
-
-		if (!ChatColor.stripColor(e.getInventory().getName()).equalsIgnoreCase(
-				"Enchantment Information!"))
-			return;
-
-		Player player = (Player) e.getWhoClicked();
-		e.setCancelled(true);
-
-		if (e.getCurrentItem() == null
-				|| e.getCurrentItem().getType() == Material.AIR
-				|| !e.getCurrentItem().hasItemMeta()) {
-			player.closeInventory();
-			return;
-		}
-
-		ChatColor colourg = ChatColor.GREEN;
-		ChatColor colourr = ChatColor.RED;
-
-		switch (e.getCurrentItem().getItemMeta().getDisplayName()) {
-
-		case "Enchantment: Regen":
-
-			player.sendMessage(colourg + "Gave you the Regen book!");
-			player.closeInventory();
-			break;
-
-		default:
-
-			player.sendMessage(colourr + "Please click on a book!");
-			player.closeInventory();
-			break;
-		}
-
 	}
 
 	@Override
