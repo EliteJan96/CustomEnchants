@@ -146,8 +146,6 @@ public class Main extends JavaPlugin {
 		getCommand("customenchants").setExecutor(new CustomEnchants());
 		getCommand("reloadcustomenchants").setExecutor(new ReloadCustomEnchants(this));
 		getCommand("enchantinformation").setExecutor(new EnchantInformation(this));
-		
-		getServer().getPluginManager().registerEvents(new EnchantInformation(this), this);
 
 		PluginManager Regensword0 = this.getServer().getPluginManager();
 		Regensword0.registerEvents(new RegenSwordListener0(this), this);
