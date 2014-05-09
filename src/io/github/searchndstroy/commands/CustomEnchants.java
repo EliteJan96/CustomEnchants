@@ -2019,7 +2019,7 @@ public class CustomEnchants implements CommandExecutor {
 
 								List<String> lore = new ArrayList<String>();
 
-								lore.add("§r§Invisibility I");
+								lore.add("§r§7Invisibility I");
 
 								iteminhandim.setLore(lore);
 

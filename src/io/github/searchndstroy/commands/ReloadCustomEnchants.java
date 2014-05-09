@@ -37,17 +37,17 @@ public class ReloadCustomEnchants implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd,
 			String cmdlabel, String[] args) {
-		
+
 		if (args.length > 0) {
-			
+
 			sender.sendMessage("You don't need any arguments for this command!");
-			
+
 			return false;
 		}
 
 		if (cmdlabel.equalsIgnoreCase("reloadcustomenchants")
 				|| cmdlabel.equalsIgnoreCase("rce")) {
-			
+
 			plugin.reloadCustomConfig();
 			sender.sendMessage(ChatColor.GREEN + "Config reloaded!");
 
