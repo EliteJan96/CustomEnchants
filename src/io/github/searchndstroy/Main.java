@@ -86,6 +86,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.Metrics;
 
 public class Main extends JavaPlugin {
 
@@ -141,6 +142,15 @@ public class Main extends JavaPlugin {
 	}
 
 	public void onEnable() {
+		
+		try {
+		    Metrics metrics = new Metrics(this);
+		    metrics.start();
+		} catch (IOException e) {
+			
+			System.out.println("Something went wrong with metrics!");
+			
+		}
 
 		config = getCustomConfig();
 
