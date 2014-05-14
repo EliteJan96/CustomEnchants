@@ -15,6 +15,7 @@
     along with CustomEnchants.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 package io.github.searchndstroy.customenchnats.common;
 
 public enum AddEnchantType {

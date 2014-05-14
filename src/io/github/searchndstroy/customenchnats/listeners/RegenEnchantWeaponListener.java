@@ -15,7 +15,9 @@
     along with CustomEnchants.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.searchndstroy.customenchnats.common;
+package io.github.searchndstroy.customenchnats.listeners;
+
+import io.github.searchndstroy.customenchnats.common.RomanNumeralConverter;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -55,7 +57,7 @@ public class RegenEnchantWeaponListener implements Listener {
 		if (!im.hasLore())
 			return;
 		
-		if (im.getLore().contains(ChatColor.RED + "Regen" + insertvariablehere)) {
+		if (im.getLore().contains(ChatColor.RED + "Regen " + RomanNumeralConverter.IntegerToRomanNumeral(level))) {
 			
 			
 			

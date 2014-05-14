@@ -15,9 +15,11 @@
     along with CustomEnchants.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 package io.github.searchndstroy.customenchnats.common;
 
 import io.github.searchndstroy.customenchnats.commands.CustomEnchantsCommand;
+import io.github.searchndstroy.customenchnats.listeners.RegenEnchantWeaponListener;
 
 import java.io.IOException;
 import java.util.logging.Level;

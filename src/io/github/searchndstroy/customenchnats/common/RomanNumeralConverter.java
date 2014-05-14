@@ -17,63 +17,63 @@
 
 package io.github.searchndstroy.customenchnats.common;
 
-public class RomanNumeralCoverter {
+public class RomanNumeralConverter {
 
-	public static String IntegerToRomanNumeral(int input) {
-		if (input < 1 || input > 3999)
-			return "Invalid Roman Number Value";
+	public static String IntegerToRomanNumeral(int level) {
+		if (level < 0)
+			return "Negatives cannot be used!";
 		String s = "";
-		while (input >= 1000) {
+		while (level >= 1000) {
 			s += "M";
-			input -= 1000;
+			level -= 1000;
 		}
-		while (input >= 900) {
+		while (level >= 900) {
 			s += "CM";
-			input -= 900;
+			level -= 900;
 		}
-		while (input >= 500) {
+		while (level >= 500) {
 			s += "D";
-			input -= 500;
+			level -= 500;
 		}
-		while (input >= 400) {
+		while (level >= 400) {
 			s += "CD";
-			input -= 400;
+			level -= 400;
 		}
-		while (input >= 100) {
+		while (level >= 100) {
 			s += "C";
-			input -= 100;
+			level -= 100;
 		}
-		while (input >= 90) {
+		while (level >= 90) {
 			s += "XC";
-			input -= 90;
+			level -= 90;
 		}
-		while (input >= 50) {
+		while (level >= 50) {
 			s += "L";
-			input -= 50;
+			level -= 50;
 		}
-		while (input >= 40) {
+		while (level >= 40) {
 			s += "XL";
-			input -= 40;
+			level -= 40;
 		}
-		while (input >= 10) {
+		while (level >= 10) {
 			s += "X";
-			input -= 10;
+			level -= 10;
 		}
-		while (input >= 9) {
+		while (level >= 9) {
 			s += "IX";
-			input -= 9;
+			level -= 9;
 		}
-		while (input >= 5) {
+		while (level >= 5) {
 			s += "V";
-			input -= 5;
+			level -= 5;
 		}
-		while (input >= 4) {
+		while (level >= 4) {
 			s += "IV";
-			input -= 4;
+			level -= 4;
 		}
-		while (input >= 1) {
+		while (level >= 1) {
 			s += "I";
-			input -= 1;
+			level -= 1;
 		}
 		return s;
 	}
