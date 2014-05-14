@@ -9,6 +9,7 @@ permissions:
             customenchants.customenchants: true
             customenchants.reload: true
             customenchants.enchantinformation: true
+            customenchants.savecustomenchants: true
 commands:
    customenchants:
       aliases: [ce]
