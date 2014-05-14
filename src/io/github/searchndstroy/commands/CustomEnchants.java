@@ -2386,6 +2386,25 @@ public class CustomEnchants implements CommandExecutor {
 						return false; // Not here
 					}
 
+					if (args[1].equalsIgnoreCase("regenfood")) {
+
+						if (iteminhandim.hasLore()) {
+
+							List<String> lore = iteminhandim.getLore();
+							
+							lore.add("§r§7RegenFood I");
+							
+							iteminhandim.setLore(lore);
+							
+							iteminhand.setItemMeta(iteminhandim);
+
+						} else {
+							
+							
+							
+						}
+					}
+
 					return false;
 				}
 

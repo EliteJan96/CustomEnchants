@@ -36,6 +36,41 @@ import org.bukkit.inventory.meta.BookMeta;
 
 public class EnchantInformation implements CommandExecutor {
 
+	FileConfiguration config = Main.config;
+
+	int seconds0 = config.getInt("Regen.I.seconds");
+	int amplifier0 = config.getInt("Regen.I.amplifier");
+	int seconds1 = config.getInt("Regen.II.seconds");
+	int amplifier1 = config.getInt("Regen.II.amplifier");
+	int seconds2 = config.getInt("Regen.III.seconds");
+	int amplifier2 = config.getInt("Regen.III.amplifier");
+	int seconds3 = config.getInt("Regen.IV.seconds");
+	int amplifier3 = config.getInt("Regen.IV.amplifier");
+	int seconds4 = config.getInt("Regen.V.seconds");
+	int amplifier4 = config.getInt("Regen.V.amplifier");
+
+	String introduction0 = "This enchantment gives you health when you hit a player. "
+			+ "It will not give you health if you attack a mob. "
+			+ "There are five tiers to this enchantment.";
+	String regen0 = "The duration of this effect is " + seconds0 + ". Or "
+			+ seconds0 * 20 + " ticks."
+			+ " Also the amplifier of the effect is " + amplifier0;
+	String regen1 = "The duration of this effect is " + seconds1 + ". Or "
+			+ seconds1 * 20 + " ticks."
+			+ " Also the amplifier of the effect is " + amplifier1;
+	String regen2 = "The duration of this effect is " + seconds2 + ". Or "
+			+ seconds2 * 20 + " ticks."
+			+ " Also the amplifier of the effect is " + amplifier2;
+	String regen3 = "The duration of this effect is " + seconds3 + ". Or "
+			+ seconds3 * 20 + " ticks"
+			+ " Also the amplifier of the effect is " + amplifier3;
+	String regen4 = "The duration of this effect is " + seconds4 + ". Or "
+			+ seconds3 * 20 + " ticks"
+			+ " Also the amplifier of the effect is " + amplifier4;
+	String introduction1 = "This enchantment gives the player your attacking poison. "
+			+ "It will not apply poison to any mob you attack. "
+			+ "There are five tiers to this enchantment.";
+
 	Main plugin;
 
 	public EnchantInformation(Main instance) {
@@ -46,8 +81,6 @@ public class EnchantInformation implements CommandExecutor {
 
 	private void InvGUI(Player player) {
 
-		FileConfiguration config = Main.config;
-
 		Inventory inv = Bukkit.createInventory(null, 9, ChatColor.AQUA
 				+ "Enchantment Information!");
 
@@ -57,48 +90,31 @@ public class EnchantInformation implements CommandExecutor {
 		BookMeta meta0 = (BookMeta) book0.getItemMeta();
 		BookMeta meta1 = (BookMeta) book1.getItemMeta();
 
-		int seconds0 = config.getInt("Regen.I.seconds");
-		int amplifier0 = config.getInt("Regen.I.amplifier");
-		int seconds1 = config.getInt("Regen.II.seconds");
-		int amplifier1 = config.getInt("Regen.II.amplifier");
-		int seconds2 = config.getInt("Regen.III.seconds");
-		int amplifier2 = config.getInt("Regen.III.amplifier");
-		int seconds3 = config.getInt("Regen.IV.seconds");
-		int amplifier3 = config.getInt("Regen.IV.amplifier");
-		int seconds4 = config.getInt("Regen.V.seconds");
-		int amplifier4 = config.getInt("Regen.V.amplifier");
-
 		meta0.setDisplayName("Enchantment: Regen");
 		meta1.setDisplayName("Enchantment: Poison");
 
 		meta0.setTitle(ChatColor.RED + "Regen Enchant");
 		meta1.setTitle(ChatColor.GREEN + "Poison Enchant");
 
-		meta1.setAuthor("searchndstroy");
 		meta0.setAuthor("searchndstroy");
+		meta1.setAuthor("searchndstroy");
 
 		List<String> pages0 = new ArrayList<String>();
 		List<String> pages1 = new ArrayList<String>();
 
-		pages0.add("This enchantment gives you health when you hit a player. "
-				+ "It will not give you health if you attack a mob. "
-				+ "There are five tiers to this enchantment.");
-		pages0.add("The duration of this effect is " + seconds0 + ". Or "
-				+ seconds0 * 20 + " ticks."
-				+ " Also the amplifier of the effect is " + amplifier0);
-		pages0.add("The duration of this effect is " + seconds1 + ". Or "
-				+ seconds1 * 20 + " ticks."
-				+ " Also the amplifier of the effect is " + amplifier1);
-		pages0.add("The duration of this effect is " + seconds2 + ". Or "
-				+ seconds2 * 20 + " ticks."
-				+ " Also the amplifier of the effect is " + amplifier2);
-		pages0.add("The duration of this effect is " + seconds3 + ". Or "
-				+ seconds3 * 20 + " ticks."
-				+ " Also the amplifier of the effect is " + amplifier3);
-		pages0.add("The duration of this effect is " + seconds4 + ". Or "
-				+ seconds4 * 20 + " ticks."
-				+ " Also the amplifier of the effect is " + amplifier4);
-
+		pages0.add(introduction0);
+		pages0.add(regen0);
+		pages0.add(regen1);
+		pages0.add(regen2);
+		pages0.add(regen3);
+		pages0.add(regen4);
+		pages1.add(introduction1);
+		//pages1.add(poison0);
+		//pages1.add(poison1);
+		//pages1.add(poison2);
+		//pages1.add(poison3);
+		//pages1.add(poison4);
+		
 		meta0.setPages(pages0);
 		meta1.setPages(pages1);
 

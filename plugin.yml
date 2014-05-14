@@ -2,7 +2,6 @@ version: 1.5
 main: io.github.searchndstroy.Main
 name: CustomEnchants
 auther: searchndstroy
-slave: megagamer10
 permissions:
     customenchants.*:
         description: Gives access to all customenchant commands

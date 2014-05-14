@@ -26,6 +26,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -40,34 +41,39 @@ public class SpeedbootsListener0 implements Listener {
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void onPlayerMoveEvent0(PlayerMoveEvent event) {
+	public void onPlayerMoveEvent1(PlayerMoveEvent event) {
 
 		Entity player = event.getPlayer();
-		int seconds0 = plugin.getCustomConfig().getInt("Speed.I.seconds");
+		int seconds0 = plugin.getCustomConfig().getInt("Speed.II.seconds");
 		int seconds = seconds0 * 20;
 		int amplifier0 = plugin.getCustomConfig().getInt("Speed.I.amplifier");
 		int amplifier = amplifier0 - 1;
+		
+
+		ItemStack[] armour = ((Player) player).getInventory()
+				.getArmorContents();
 
 		if (player instanceof Player) {
 
-			if (!(((HumanEntity) player).getInventory().getBoots() != null)) {
 
-			} else {
+			if (armour == null || armour.length == 0) {
+				return;
+
+		} else {
+			
+			Item
+
+			if () {
 
 				if (((HumanEntity) player).getInventory().getBoots()
-						.getItemMeta().hasLore()) {
+						.getItemMeta().getLore().contains("§r§7Speed I")) {
 
-					if (((HumanEntity) player).getInventory().getBoots()
-							.getItemMeta().getLore().contains("§r§7Speed I")) {
+					((HumanEntity) player).addPotionEffect(new PotionEffect(
+							PotionEffectType.SPEED, seconds, amplifier));
 
-						((HumanEntity) player)
-								.addPotionEffect(new PotionEffect(
-										PotionEffectType.SPEED, seconds,
-										amplifier));
-
-					}
 				}
 			}
+		}
 		}
 	}
 }

@@ -46,6 +46,8 @@ import io.github.searchndstroy.listeners.PoisonSwordListener1;
 import io.github.searchndstroy.listeners.PoisonSwordListener2;
 import io.github.searchndstroy.listeners.PoisonSwordListener3;
 import io.github.searchndstroy.listeners.PoisonSwordListener4;
+import io.github.searchndstroy.listeners.RegenSteakConsumeListener0;
+import io.github.searchndstroy.listeners.RegenSteakConsumeListener1;
 import io.github.searchndstroy.listeners.RegenSwordListener0;
 import io.github.searchndstroy.listeners.RegenSwordListener1;
 import io.github.searchndstroy.listeners.RegenSwordListener2;
@@ -89,6 +91,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
 
 public class Main extends JavaPlugin {
+	
+	public static Main plugin;
 
 	public static FileConfiguration config;
 	private FileConfiguration EnchantConfig;
@@ -149,6 +153,7 @@ public class Main extends JavaPlugin {
 		} catch (IOException e) {
 			
 			System.out.println("Something went wrong with metrics!");
+			System.out.println(e);
 			
 		}
 
@@ -161,6 +166,10 @@ public class Main extends JavaPlugin {
 				new EnchantInformation(this));
 		getCommand("savecustomenchants").setExecutor(
 				new SaveCustomEnchants(this));
+		
+		PluginManager pm = this.getServer().getPluginManager();
+		pm.registerEvents(new RegenSteakConsumeListener0(), this);
+		pm.registerEvents(new RegenSteakConsumeListener1(), this);
 
 		PluginManager Regensword0 = this.getServer().getPluginManager();
 		Regensword0.registerEvents(new RegenSwordListener0(this), this);

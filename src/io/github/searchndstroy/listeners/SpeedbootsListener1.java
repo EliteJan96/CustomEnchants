@@ -26,6 +26,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -50,22 +51,23 @@ public class SpeedbootsListener1 implements Listener {
 
 		if (player instanceof Player) {
 
-			if (!(((HumanEntity) player).getInventory().getBoots() != null)) {
+			ItemStack[] armour = ((Player) player).getInventory()
+					.getArmorContents();
 
-			} else {
+			if (armour == null || armour.length == 0)
+				return;
+
+		} else {
+
+			if (((HumanEntity) player).getInventory().getBoots().getItemMeta()
+					.hasLore()) {
 
 				if (((HumanEntity) player).getInventory().getBoots()
-						.getItemMeta().hasLore()) {
+						.getItemMeta().getLore().contains("§r§7Speed II")) {
 
-					if (((HumanEntity) player).getInventory().getBoots()
-							.getItemMeta().getLore().contains("§r§7Speed II")) {
+					((HumanEntity) player).addPotionEffect(new PotionEffect(
+							PotionEffectType.SPEED, seconds, amplifier));
 
-						((HumanEntity) player)
-								.addPotionEffect(new PotionEffect(
-										PotionEffectType.SPEED, seconds,
-										amplifier));
-
-					}
 				}
 			}
 		}

@@ -57,7 +57,7 @@ public class BlindswordListener1 implements Listener {
 
 				if (!((HumanEntity) attacker).getInventory().getItemInHand()
 						.equals(null)
-						|| ((HumanEntity) attacker).getInventory()
+						|| !((HumanEntity) attacker).getInventory()
 								.getItemInHand().equals(Material.AIR)) {
 
 					if (((HumanEntity) attacker).getItemInHand().getItemMeta()

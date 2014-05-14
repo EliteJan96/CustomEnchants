@@ -57,7 +57,7 @@ public class WitherSWordListener4 implements Listener {
 
 				if (!((HumanEntity) attacker).getInventory().getItemInHand()
 						.equals(null)
-						|| ((HumanEntity) attacker).getInventory()
+						|| !((HumanEntity) attacker).getInventory()
 								.getItemInHand().equals(Material.AIR)) {
 
 					if (((HumanEntity) attacker).getItemInHand().getItemMeta()
@@ -71,9 +71,6 @@ public class WitherSWordListener4 implements Listener {
 									.addPotionEffect(new PotionEffect(
 											PotionEffectType.WITHER, seconds,
 											amplifier));
-							{
-
-							}
 						}
 					}
 				}
