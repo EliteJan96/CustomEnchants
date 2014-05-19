@@ -1,17 +1,8 @@
-# If you need help with this, goto <link> for a configuration tutorial.
 regenweapon:
-# ^ Enchantment to modify
- TypeForSeconds: add
- # ^  multiply/add/none(adds / multiplies this each tier) (If none is selected the seconds will be not changed per tier)
+ TypeForSeconds: multiply
  Add/MultiplySecondsBy: 1
- # ^ If multiply/add is selected, then you will multiply/add the seconds by this number each tier. (Including the first tier)
  defaultseconds: 1
- # ^ Default seconds, one used for adding/multiplying. Also this will be used for all tiers if you selected none for TypeForSeconds
  TypeForAmplifier: add
- # ^ multiply/add/none(adds / multiplies this each tier) (If none is selected the amplifier will be not changed per tier)
  Add/MultiplyAmplifierBy: 1
- # ^ If multiply/add is selected, then you will multiply/add the amplifier by this number each tier. (Including the first tier)
  defaultamplifier: 1
- # ^ Default amplifier, one used for adding/multiplying. Also this will be used for all tiers if you selected none for TypeForAmplifier
- MaximumTierLevel: 
- # ^ Put -1 for unlimited, otherwise put a number above 0 
+ MaximumTierLevel: -1
