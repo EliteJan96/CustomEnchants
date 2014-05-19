@@ -15,11 +15,11 @@
     along with CustomEnchants.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.searchndstroy.customenchnats.listeners;
+package io.github.searchndstroy.customenchants.listeners;
 
-import io.github.searchndstroy.customenchnats.common.Balh;
-import io.github.searchndstroy.customenchnats.common.GetLoreLine;
-import io.github.searchndstroy.customenchnats.common.RomanNumeralCoverterToInt;
+import io.github.searchndstroy.customenchants.common.Balh;
+import io.github.searchndstroy.customenchants.common.GetLoreLine;
+import io.github.searchndstroy.customenchants.common.RomanNumeralCoverterToInt;
 
 import java.util.List;
 

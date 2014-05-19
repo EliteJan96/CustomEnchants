@@ -16,7 +16,7 @@
  */
 
 
-package io.github.searchndstroy.customenchnats.common;
+package io.github.searchndstroy.customenchants.common;
 
 public enum AddEnchantType {
 

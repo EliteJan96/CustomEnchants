@@ -16,12 +16,12 @@
  */
 
 
-package io.github.searchndstroy.customenchnats.commands;
+package io.github.searchndstroy.customenchants.commands;
 
 import java.util.List;
 
-import io.github.searchndstroy.customenchnats.common.AddEnchant;
-import io.github.searchndstroy.customenchnats.common.AddEnchantType;
+import io.github.searchndstroy.customenchants.common.AddEnchant;
+import io.github.searchndstroy.customenchants.common.AddEnchantType;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

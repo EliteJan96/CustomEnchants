@@ -16,10 +16,10 @@
  */
 
 
-package io.github.searchndstroy.customenchnats.common;
+package io.github.searchndstroy.customenchants.common;
 
-import io.github.searchndstroy.customenchnats.commands.CustomEnchantsCommand;
-import io.github.searchndstroy.customenchnats.listeners.RegenEnchantWeaponListener;
+import io.github.searchndstroy.customenchants.commands.CustomEnchantsCommand;
+import io.github.searchndstroy.customenchants.listeners.RegenEnchantWeaponListener;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -59,6 +59,8 @@ public class CustomEnchants extends JavaPlugin {
 		config = getConfig();
 
 		logger.log(info, "Plugin enabled! Have fun! :D");
+		logger.log(info, "You are running a dev version! THIS IS NOT A COMPLETE VERSION, IT IS UNFINISHED.");
+		saveConfig();
 
 		try {
 

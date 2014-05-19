@@ -16,7 +16,7 @@
  */
 
 
-package io.github.searchndstroy.customenchnats.common;
+package io.github.searchndstroy.customenchants.common;
 
 import java.util.List;
 
@@ -33,17 +33,21 @@ public class AddEnchant {
 		
 		int maxtierlevel = CustomEnchants.config.getInt(type.toString().toLowerCase() + ".MaximumTierLevel");
 		
-		if (tierlevel >= 0) {
+		if (tierlevel <= 0) {
 			
-			player.sendMessage(ChatColor.RED + "You cannot have a tier of 0!");
+			player.sendMessage(ChatColor.RED + "You cannot have a tier of " + tierlevel);
 			return;
 		}
 		
-		if (tierlevel > maxtierlevel) {
+		if (tierlevel > maxtierlevel && maxtierlevel != -1) {
 			
 			player.sendMessage(ChatColor.RED + "You cannot have a tier higher than the maximum! ");
 			player.sendMessage(ChatColor.RED + "Max tier level is: " + maxtierlevel);
 			return;
+		}
+		
+		if (maxtierlevel == -1) {
+			
 		}
 		
 		String tierlevelconverted = RomanNumeralConverter.IntegerToRomanNumeral(tierlevel);
