@@ -18,28 +18,50 @@
 
 package io.github.searchndstroy.customenchnats.common;
 
+import java.util.List;
+
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class AddEnchant {
 
-	public static void AddEnchantToItem(AddEnchantType type, ItemStack itemstack, Player player) {
+	public static void AddEnchantToItem(AddEnchantType type, ItemMeta itemmeta, List<String> lore, Player player, int tierlevel) {
 
-		if (ItemHasCurrentEnchant(itemstack))
+		if (ItemHasCurrentEnchant(itemmeta))
 			return;
+		
+		int maxtierlevel = CustomEnchants.config.getInt(type.toString().toLowerCase() + ".MaximumTierLevel");
+		
+		if (tierlevel >= 0) {
+			
+			player.sendMessage(ChatColor.RED + "You cannot have a tier of 0!");
+			return;
+		}
+		
+		if (tierlevel > maxtierlevel) {
+			
+			player.sendMessage(ChatColor.RED + "You cannot have a tier higher than the maximum! ");
+			player.sendMessage(ChatColor.RED + "Max tier level is: " + maxtierlevel);
+			return;
+		}
+		
+		String tierlevelconverted = RomanNumeralConverter.IntegerToRomanNumeral(tierlevel);
 		
 		switch(type) {
 		
-		case REGENFOOD:
+		case REGENWEAPON:
+			lore.add("RegenWeapon " + tierlevelconverted);
+			player.sendMessage(ChatColor.GREEN + "Sucessfully enchanted your item with " + type.toString());
 			break;
-		
 		default:
+			player.sendMessage("Type in a valid enchantment name!");
 			break;
 		}
 
 	}
 
-	public static boolean ItemHasCurrentEnchant(ItemStack itemstack) {
+	public static boolean ItemHasCurrentEnchant(ItemMeta itemmeta) {
 
 		return false;
 

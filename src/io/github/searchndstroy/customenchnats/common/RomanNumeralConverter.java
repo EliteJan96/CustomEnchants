@@ -21,7 +21,7 @@ public class RomanNumeralConverter {
 
 	public static String IntegerToRomanNumeral(int level) {
 		if (level < 0)
-			return "Negatives cannot be used!";
+			return null;
 		String s = "";
 		while (level >= 1000) {
 			s += "M";

@@ -1,5 +1,5 @@
-version: 1.5
-main: io.github.searchndstroy.Main
+version: 1.5pre1
+main: io.github.searchndstroy.customenchants.common.CustomEnchants
 name: CustomEnchants
 auther: searchndstroy
 permissions:

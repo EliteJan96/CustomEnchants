@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
@@ -34,14 +35,30 @@ public class CustomEnchants extends JavaPlugin {
 	public final Logger logger = this.getLogger();
 	public static final Level info = Level.INFO;
 	public static final Level severe = Level.SEVERE;
-
-	public void onEnable() {
-
-		logger.log(info, "Plugin enabled! Have fun! :D");
+	
+	public static FileConfiguration config;
+	
+	public final void eventRegister() {
+		
 		PluginManager pm = this.getServer().getPluginManager();
 		pm.registerEvents(new RegenEnchantWeaponListener(), this);
-
+		
+	}
+	
+	public final void commandRegister() {
+		
 		getCommand("customenchants").setExecutor(new CustomEnchantsCommand());
+		
+	}
+	
+	public void onEnable() {
+		
+		eventRegister();
+		commandRegister();
+		
+		config = getConfig();
+
+		logger.log(info, "Plugin enabled! Have fun! :D");
 
 		try {
 

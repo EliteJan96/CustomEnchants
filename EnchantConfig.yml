@@ -1,9 +1,0 @@
-RegenWeapon:
-#Enchantment to modify
- TypeForSeconds: multiply
- #multiply/add/none(adds / multiplies this each tier) (If none is selected the seconds will be not changed per tier)
- seconds: 1
- TypeForAmplifier: add
- #multiply/add/none(adds / multiplies this each tier) (If none is selected the amplifier will be not changed per tier)
- amplifier: 1
- 

@@ -18,10 +18,19 @@
 
 package io.github.searchndstroy.customenchnats.commands;
 
+import java.util.List;
+
+import io.github.searchndstroy.customenchnats.common.AddEnchant;
+import io.github.searchndstroy.customenchnats.common.AddEnchantType;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class CustomEnchantsCommand implements CommandExecutor {
 
@@ -29,15 +38,43 @@ public class CustomEnchantsCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdlabel,
 			String[] args) {
 		
+		if (args.length < 3 || args.length > 3) {
+			
+			sender.sendMessage(ChatColor.RED + "/customenchants enchant <enchantname> <tierlevel>");
+			
+			return false;
+		}
+		
 		if (!(sender instanceof Player)) {
 			
 			sender.sendMessage("You cannot run this command as console!");
 			
 		} else {
+			Player player = (Player) sender;
 			
-			if (cmdlabel.equalsIgnoreCase("customenchants") || cmdlabel.equalsIgnoreCase("cmdlabel")) {
+			ItemStack itemstack = player.getItemInHand();
+			
+			if (itemstack == null || itemstack.getType() == Material.AIR) {
 				
+				player.sendMessage("Put a item in your hand!");
 				
+				return false;
+			}
+			
+			ItemMeta itemmeta = itemstack.getItemMeta();
+			
+			List<String> lore = itemmeta.getLore();
+			
+			if (args[0].equalsIgnoreCase("enchant")) {
+				
+				if (args[1].equalsIgnoreCase("RegenWeapon")) {
+					
+					int tierlevel = Integer.parseInt(args[2]);
+					AddEnchant.AddEnchantToItem(AddEnchantType.REGENWEAPON, itemmeta, lore, player, tierlevel);
+					
+					
+					return true;
+				}
 				
 				return false;
 			}

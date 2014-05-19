@@ -17,9 +17,12 @@
 
 package io.github.searchndstroy.customenchnats.listeners;
 
-import io.github.searchndstroy.customenchnats.common.RomanNumeralConverter;
+import io.github.searchndstroy.customenchnats.common.Balh;
+import io.github.searchndstroy.customenchnats.common.GetLoreLine;
+import io.github.searchndstroy.customenchnats.common.RomanNumeralCoverterToInt;
 
-import org.bukkit.ChatColor;
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -34,11 +37,19 @@ import org.bukkit.potion.PotionEffectType;
 
 public class RegenEnchantWeaponListener implements Listener {
 	
+	private static final String secondstypepath = "regenweapon.TypeForSeconds";
+	private static final String defaultsecondspath = "regenweapon.defaultseconds";
+	private static final String amplifiertypepath = "regenweapon.TypeForAmplifier";
+	private static final String defaultamplifierpath = "regenweapon.defaultamplifier";
+	private static final String secondstoworkwith = "regenweapon.Add/MultiplySecondsBy";
+	private static final String amplifiertoworkwith = "regenweapon. Add/MultiplyAmplifierBy";
+	
 	@EventHandler(ignoreCancelled = true)
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
 		
+		
+		
 		Entity damager = e.getDamager();
-		Entity target = e.getEntity();
 		
 		if (!(damager instanceof Player))
 			return;
@@ -57,9 +68,20 @@ public class RegenEnchantWeaponListener implements Listener {
 		if (!im.hasLore())
 			return;
 		
-		if (im.getLore().contains(ChatColor.RED + "Regen " + RomanNumeralConverter.IntegerToRomanNumeral(level))) {
+		List<String> lore = im.getLore();
+		String nametype = "RegenWeapon";
+		
+		if (lore.contains("RegenWeapon ")) {
 			
+			int line = GetLoreLine.getLoreLine(player, lore, nametype);
 			
+			String lore1 = lore.get(line);
+			String rm = lore1.replace("RegenWeapon ", "");
+			
+			int converted = RomanNumeralCoverterToInt.romanToDecimal(rm);
+			
+			int seconds = Balh.getSeconds(secondstypepath, defaultsecondspath, secondstoworkwith, converted);
+			int amplifier = Balh.getAmplifier(amplifiertypepath, defaultamplifierpath, converted);
 			
 			PotionEffect potion = new PotionEffect(PotionEffectType.REGENERATION, seconds, amplifier);
 			player.addPotionEffect(potion);
