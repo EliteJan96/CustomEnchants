@@ -26,6 +26,7 @@ import io.github.searchndstroy.customenchants.common.RomanNumeralConverterToInt;
 import java.util.List;
 
 import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -39,17 +40,17 @@ import org.bukkit.potion.PotionEffectType;
 
 public class RegenEnchantWeaponListener implements Listener {
 	
-	private String secondstype = CustomEnchants.config.getString("regenweapon.TypeForSeconds");
-	private int defaultseconds = CustomEnchants.config.getInt("regenweapon.defaultseconds");
-	private String amplifiertype = CustomEnchants.config.getString("regenweapon.TypeForAmplifier");
-	private int defaultamplifier = CustomEnchants.config.getInt("regenweapon.defaultamplifier");
-	private int secondstoworkwith = CustomEnchants.config.getInt("regenweapon.secondstoworkwith");
-	private int amplifiertoworkwith = CustomEnchants.config.getInt("regenweapon.amplifiertoworkwith");
-	private int maxtierlevel = CustomEnchants.config.getInt("regenweapon.MaximumTierLevel");
-	private String enchantmentname = "RegenWeapon";
-	
 	@EventHandler(ignoreCancelled = true)
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
+		
+		String secondstype = CustomEnchants.config.getString("regenweapon.TypeForSeconds");
+		int defaultseconds = CustomEnchants.config.getInt("regenweapon.defaultseconds");
+		String amplifiertype = CustomEnchants.config.getString("regenweapon.TypeForAmplifier");
+		int defaultamplifier = CustomEnchants.config.getInt("regenweapon.defaultamplifier");
+		int secondstoworkwith = CustomEnchants.config.getInt("regenweapon.secondstoworkwith");
+	    int amplifiertoworkwith = CustomEnchants.config.getInt("regenweapon.amplifiertoworkwith");
+		int maxtierlevel = CustomEnchants.config.getInt("regenweapon.MaximumTierLevel");
+		String enchantmentname = "RegenWeapon";
 		
 		Entity damager = e.getDamager();
 		
@@ -79,7 +80,7 @@ public class RegenEnchantWeaponListener implements Listener {
 		if (tierlevel == 0)
 			return;
 		
-		if (IsEnchantmentBannedCommand.isEnchantmentBanned(CustomEnchants.enchantments, enchantmentname, player))
+		if (IsEnchantmentBannedCommand.isEnchantmentBanned(CustomEnchants.enchantments, enchantmentname))
 			return;
 			
 		int seconds = GetSecondsOrAmplifier.getSeconds(secondstype, defaultseconds, secondstoworkwith, tierlevel);

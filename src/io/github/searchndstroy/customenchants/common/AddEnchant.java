@@ -56,7 +56,9 @@ public class AddEnchant {
 
 		String tierlevelconverted = RomanNumeralConverter.IntegerToRomanNumeral(tierlevel);
 		
-		lore.add(type + " " + tierlevelconverted);
+		player.sendMessage(ChatColor.GREEN + "Sucessfully enchanted your item with " + type + " " + tierlevel);
+		
+		lore.add(ChatColor.GRAY + type + " " + tierlevelconverted);
 		itemmeta.setLore(lore);
 		itemstack.setItemMeta(itemmeta);
 	}

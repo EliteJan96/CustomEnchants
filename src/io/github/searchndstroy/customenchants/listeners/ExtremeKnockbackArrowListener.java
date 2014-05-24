@@ -46,8 +46,6 @@ public class ExtremeKnockbackArrowListener implements Listener {
 		if (!(damager instanceof Player))
 			return;
 		
-		Player player = (Player) damager;
-		
 		ItemStack bow = e.getBow();
 		
 		if (bow == null || bow.getType() == Material.AIR)

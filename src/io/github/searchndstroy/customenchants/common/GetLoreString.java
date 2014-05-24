@@ -19,6 +19,8 @@ package io.github.searchndstroy.customenchants.common;
 
 import java.util.List;
 
+import org.bukkit.ChatColor;
+
 
 public class GetLoreString {
 	
@@ -28,22 +30,24 @@ public class GetLoreString {
 		
 		boolean found = false;
 		int x = 0;
-		while (found == false && x != maxtierlevel) {
+		int maxloresize = lore.size();
+		while (found == false && x <= maxloresize) {
 			
 			int y = 0;
 			
-			String loreline = lore.get(y);
+			String loreline = lore.get(y).toLowerCase();
 			
-			y++;
+			enchantname = enchantname.toLowerCase();
 			
-			loreline.toLowerCase();
 			
-			if (loreline.contains(enchantname.toLowerCase())) {
+			if (loreline.contains(enchantname)) {
 				
-				String converted = loreline.replace(enchantname.toLowerCase(), nothing);
+				String converted = loreline.replace(ChatColor.GRAY + enchantname + " ", nothing).toUpperCase();
 				
 				return converted;
 			}
+			y++;
+			x++;
 			
 			return nothing;
 		}
