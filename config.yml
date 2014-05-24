@@ -1,8 +1,12 @@
 regenweapon:
  TypeForSeconds: multiply
- Add/MultiplySecondsBy: 1
+ secondstoworkwith: 1
  defaultseconds: 1
  TypeForAmplifier: add
- Add/MultiplyAmplifierBy: 1
+ amplifiertoworkwith: 1
  defaultamplifier: 1
  MaximumTierLevel: -1
+extremeknocbackarrow:
+ TypeForVelocity: add
+ velocitytoworkwith: 1
+ defaultvelocity: 1

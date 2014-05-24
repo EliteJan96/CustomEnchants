@@ -20,18 +20,20 @@ package io.github.searchndstroy.customenchants.common;
 
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class AddEnchant {
 
-	public static void AddEnchantToItem(AddEnchantType type, ItemMeta itemmeta, List<String> lore, Player player, int tierlevel) {
+	public static void AddEnchantToItem(AddEnchantType type, ItemStack itemstack, ItemMeta itemmeta, List<String> lore, Player player, int tierlevel, boolean bypasslorecheck) {
 
-		if (ItemHasCurrentEnchant(itemmeta))
-			return;
-		
 		int maxtierlevel = CustomEnchants.config.getInt(type.toString().toLowerCase() + ".MaximumTierLevel");
+		
+		if (ItemHasCurrentEnchant(itemmeta, lore, type) == true && bypasslorecheck == false)
+			return;
 		
 		if (tierlevel <= 0) {
 			
@@ -46,17 +48,15 @@ public class AddEnchant {
 			return;
 		}
 		
-		if (maxtierlevel == -1) {
-			
-		}
-		
 		String tierlevelconverted = RomanNumeralConverter.IntegerToRomanNumeral(tierlevel);
 		
-		switch(type) {
+		switch (type) {
 		
 		case REGENWEAPON:
-			lore.add("RegenWeapon " + tierlevelconverted);
+			lore.add(ChatColor.GRAY + "RegenWeapon " + tierlevelconverted);
 			player.sendMessage(ChatColor.GREEN + "Sucessfully enchanted your item with " + type.toString());
+			itemmeta.setLore(lore);
+			itemstack.setItemMeta(itemmeta);
 			break;
 		default:
 			player.sendMessage("Type in a valid enchantment name!");
@@ -65,9 +65,51 @@ public class AddEnchant {
 
 	}
 
-	public static boolean ItemHasCurrentEnchant(ItemMeta itemmeta) {
-
-		return false;
-
+	public static boolean ItemHasCurrentEnchant(ItemMeta itemmeta, List<String> lore, AddEnchantType type) {
+		
+		if (!itemmeta.hasLore())
+			return false;
+		
+		if (lore.isEmpty() || lore == null)
+			return false;
+		
+		int lorelength = lore.size();
+		
+		boolean result = DoesThisItemContainEnchantment(lorelength, lore, type);
+		
+		if (result == true)
+			return true;
+		else 
+			return false;
+		
+	}
+	
+	private static boolean DoesThisItemContainEnchantment(int lorelength, List<String> lore, AddEnchantType type) {
+		
+		boolean found = false;
+		int x = 0;
+		
+		while (found == false && x != lorelength) {
+			
+			String loreline = lore.get(x);
+			
+			System.out.println(loreline);
+			
+			loreline.toLowerCase();
+			
+			if (loreline.contains(type.toString().toLowerCase())) {
+				
+				found = true;
+				return found;
+			} else {
+				
+				x++;
+				
+			}
+			
+		}
+		return found;
+		
+		
 	}
 }

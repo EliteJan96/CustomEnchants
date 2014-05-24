@@ -39,10 +39,9 @@ public class CustomEnchants extends JavaPlugin {
 	public static FileConfiguration config;
 	
 	public final void eventRegister() {
-		
 		PluginManager pm = this.getServer().getPluginManager();
 		pm.registerEvents(new RegenEnchantWeaponListener(), this);
-		
+		pm.registerEvents(new ExtremeKnockbackArrows() , this);
 	}
 	
 	public final void commandRegister() {
@@ -51,16 +50,21 @@ public class CustomEnchants extends JavaPlugin {
 		
 	}
 	
+	@Override
+	public void onLoad() {
+		
+		config = getConfig();
+	}
+	
+	@Override
 	public void onEnable() {
 		
 		eventRegister();
 		commandRegister();
-		
-		config = getConfig();
 
 		logger.log(info, "Plugin enabled! Have fun! :D");
 		logger.log(info, "You are running a dev version! THIS IS NOT A COMPLETE VERSION, IT IS UNFINISHED.");
-		saveConfig();
+		saveDefaultConfig();
 
 		try {
 
@@ -75,6 +79,7 @@ public class CustomEnchants extends JavaPlugin {
 
 	}
 
+	@Override
 	public void onDisable() {
 
 		logger.log(info, "Plugin disabled! Hope you had fun! :D");

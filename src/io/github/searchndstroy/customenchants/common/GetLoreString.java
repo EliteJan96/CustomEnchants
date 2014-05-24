@@ -19,29 +19,36 @@ package io.github.searchndstroy.customenchants.common;
 
 import java.util.List;
 
-import org.bukkit.entity.Player;
 
-public class GetLoreLine {
+public class GetLoreString {
 	
-	public static int getLoreLine(Player player, List<String> lore, String nametype) {
+	public static String getLoreString(List<String> lore, int maxtierlevel, String enchantname) {
 		
+		String nothing = "";
+		
+		boolean found = false;
 		int x = 0;
-		
-		while (x == 0) {
+		while (found == false && x != maxtierlevel) {
 			
 			int y = 0;
 			
-			String line1 = lore.get(y++);
+			String loreline = lore.get(y);
 			
-			if (line1.contains(nametype + " ")) {
+			y++;
+			
+			loreline.toLowerCase();
+			
+			if (loreline.contains(enchantname.toLowerCase())) {
 				
-				++x;
-				return y - 1;
+				String converted = loreline.replace(enchantname.toLowerCase(), nothing);
 				
+				return converted;
 			}
 			
+			return nothing;
 		}
-		return 0;
+		
+		return nothing;
 	}
 
 }

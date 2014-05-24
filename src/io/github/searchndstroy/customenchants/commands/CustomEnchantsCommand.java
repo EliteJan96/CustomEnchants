@@ -18,13 +18,16 @@
 
 package io.github.searchndstroy.customenchants.commands;
 
-import java.util.List;
-
 import io.github.searchndstroy.customenchants.common.AddEnchant;
 import io.github.searchndstroy.customenchants.common.AddEnchantType;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -65,13 +68,27 @@ public class CustomEnchantsCommand implements CommandExecutor {
 			
 			List<String> lore = itemmeta.getLore();
 			
+			if (lore == null) {
+				
+				lore = new ArrayList<String>();
+				
+			}
+			
 			if (args[0].equalsIgnoreCase("enchant")) {
 				
 				if (args[1].equalsIgnoreCase("RegenWeapon")) {
 					
-					int tierlevel = Integer.parseInt(args[2]);
-					AddEnchant.AddEnchantToItem(AddEnchantType.REGENWEAPON, itemmeta, lore, player, tierlevel);
+					try {
 					
+					int tierlevel = Integer.parseInt(args[2]);
+					AddEnchant.AddEnchantToItem(AddEnchantType.REGENWEAPON, itemstack, itemmeta, lore, player, tierlevel, false);
+					}
+					
+					catch (NumberFormatException ex) {
+						
+						sender.sendMessage("Use a number!");
+						return false;
+					}
 					
 					return true;
 				}

@@ -17,7 +17,7 @@
 
 package io.github.searchndstroy.customenchants.common;
 
-public class RomanNumeralCoverterToInt {
+public class RomanNumeralConverterToInt {
 public static int romanToDecimal(String number) {
     int decimal = 0;
     int lastNumber = 0;

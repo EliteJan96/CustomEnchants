@@ -17,9 +17,10 @@
 
 package io.github.searchndstroy.customenchants.listeners;
 
-import io.github.searchndstroy.customenchants.common.Balh;
-import io.github.searchndstroy.customenchants.common.GetLoreLine;
-import io.github.searchndstroy.customenchants.common.RomanNumeralCoverterToInt;
+import io.github.searchndstroy.customenchants.common.CustomEnchants;
+import io.github.searchndstroy.customenchants.common.GetLoreString;
+import io.github.searchndstroy.customenchants.common.GetSecondsOrAmplifier;
+import io.github.searchndstroy.customenchants.common.RomanNumeralConverterToInt;
 
 import java.util.List;
 
@@ -37,17 +38,17 @@ import org.bukkit.potion.PotionEffectType;
 
 public class RegenEnchantWeaponListener implements Listener {
 	
-	private static final String secondstypepath = "regenweapon.TypeForSeconds";
-	private static final String defaultsecondspath = "regenweapon.defaultseconds";
-	private static final String amplifiertypepath = "regenweapon.TypeForAmplifier";
-	private static final String defaultamplifierpath = "regenweapon.defaultamplifier";
-	private static final String secondstoworkwith = "regenweapon.Add/MultiplySecondsBy";
-	private static final String amplifiertoworkwith = "regenweapon. Add/MultiplyAmplifierBy";
+	private String secondstype = CustomEnchants.config.getString("regenweapon.TypeForSeconds");
+	private int defaultseconds = CustomEnchants.config.getInt("regenweapon.defaultseconds");
+	private String amplifiertype = CustomEnchants.config.getString("regenweapon.TypeForAmplifier");
+	private int defaultamplifier = CustomEnchants.config.getInt("regenweapon.defaultamplifier");
+	private int secondstoworkwith = CustomEnchants.config.getInt("regenweapon.secondstoworkwith");
+	private int amplifiertoworkwith = CustomEnchants.config.getInt("regenweapon.amplifiertoworkwith");
+	private int maxtierlevel = CustomEnchants.config.getInt("regenweapon.MaximumTierLevel");
+	private String enchantmentname = "RegenWeapon";
 	
 	@EventHandler(ignoreCancelled = true)
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
-		
-		
 		
 		Entity damager = e.getDamager();
 		
@@ -69,24 +70,20 @@ public class RegenEnchantWeaponListener implements Listener {
 			return;
 		
 		List<String> lore = im.getLore();
-		String nametype = "RegenWeapon";
 		
-		if (lore.contains("RegenWeapon ")) {
+		String string = GetLoreString.getLoreString(lore, maxtierlevel, enchantmentname);
+		
+		int tierlevel = RomanNumeralConverterToInt.romanToDecimal(string);
+		
+		if (tierlevel == 0)
+			return;
 			
-			int line = GetLoreLine.getLoreLine(player, lore, nametype);
+		int seconds = GetSecondsOrAmplifier.getSeconds(secondstype, defaultseconds, secondstoworkwith, tierlevel);
+		int amplifier = GetSecondsOrAmplifier.getAmplifier(amplifiertype, defaultamplifier, amplifiertoworkwith, tierlevel);
+		
+		PotionEffect potion = new PotionEffect(PotionEffectType.REGENERATION, seconds, amplifier);
+		player.addPotionEffect(potion);
 			
-			String lore1 = lore.get(line);
-			String rm = lore1.replace("RegenWeapon ", "");
-			
-			int converted = RomanNumeralCoverterToInt.romanToDecimal(rm);
-			
-			int seconds = Balh.getSeconds(secondstypepath, defaultsecondspath, secondstoworkwith, converted);
-			int amplifier = Balh.getAmplifier(amplifiertypepath, defaultamplifierpath, converted);
-			
-			PotionEffect potion = new PotionEffect(PotionEffectType.REGENERATION, seconds, amplifier);
-			player.addPotionEffect(potion);
-			
-		}
 	}
 
 }

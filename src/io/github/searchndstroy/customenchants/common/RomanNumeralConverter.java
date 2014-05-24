@@ -20,8 +20,8 @@ package io.github.searchndstroy.customenchants.common;
 public class RomanNumeralConverter {
 
 	public static String IntegerToRomanNumeral(int level) {
-		if (level < 0)
-			return null;
+		if (level <= 0)
+			return "";
 		String s = "";
 		while (level >= 1000) {
 			s += "M";
