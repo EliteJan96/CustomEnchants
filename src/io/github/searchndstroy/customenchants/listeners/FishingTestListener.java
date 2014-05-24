@@ -1,4 +1,6 @@
-package io.github.searchndstroy.customenchants.common;
+package io.github.searchndstroy.customenchants.listeners;
+
+import io.github.searchndstroy.customenchants.common.CustomEnchants;
 
 import java.util.logging.Level;
 
@@ -22,6 +24,7 @@ public class FishingTestListener implements Listener {
 	private String message = "";
 	private String currencysymbol = "";
 	private String logmessage = "";
+	private String currencysymbolpos = "";
 	
 	@EventHandler(ignoreCancelled = true)
 	public void onPlayerFish(PlayerFishEvent e) {
@@ -36,9 +39,21 @@ public class FishingTestListener implements Listener {
 		
 		if (random < randompercent) {
 			
-			message.replace("%MONEY%", currencysymbol + objectToString(random));
-			logmessage.replace("%MONEY%", currencysymbol + objectToString(random));
-			logmessage.replace("%PLAYER%", player.getName());
+			if (currencysymbolpos.equalsIgnoreCase("left")) {
+				
+				message.replace("@MONEY%", currencysymbol + objectToString(random));
+				logmessage.replace("@MONEY", currencysymbol + objectToString(random));
+				
+			} else if (currencysymbolpos.equalsIgnoreCase("right")) {
+				
+				message.replace("@MONEY%", objectToString(random) + currencysymbol);
+				logmessage.replace("@MONEY", objectToString(random) + currencysymbol);
+				
+			}
+			
+			message.replace("@MONEY%", currencysymbol + objectToString(random));
+			logmessage.replace("@MONEY", currencysymbol + objectToString(random));
+			logmessage.replace("@PLAYER", player.getName());
 			
 			CustomEnchants.economy.depositPlayer(player.getName(), random);
 			player.sendMessage(message);

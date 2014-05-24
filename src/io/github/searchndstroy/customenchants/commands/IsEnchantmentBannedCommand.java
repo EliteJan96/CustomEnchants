@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.github.searchndstroy.customenchants.common.CustomEnchants;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,7 +21,7 @@ public class IsEnchantmentBannedCommand implements CommandExecutor {
 		
 		if (args.length == 0 || args.length > 1) {
 			
-			sender.sendMessage("Specify a enchantment!");
+			sender.sendMessage(ChatColor.RED + "Specify a enchantment!");
 			return false;
 		}
 		

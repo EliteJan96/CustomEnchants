@@ -24,6 +24,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.map.MapView;
 
 public class AddEnchant {
 
@@ -35,8 +36,11 @@ public class AddEnchant {
 		if (!CustomEnchants.enchantments.contains(type))
 			return;
 
-		if (ItemHasCurrentEnchant(itemmeta, lore, type) == true && bypasslorecheck == false)
+		if (ItemHasCurrentEnchant(itemmeta, lore, type)&& !bypasslorecheck) {
+			
+			player.sendMessage(ChatColor.RED + "This item already has " + type + " on it!");
 			return;
+		}
 
 		if (tierlevel <= 0) {
 
@@ -86,19 +90,14 @@ public class AddEnchant {
 
 			String loreline = lore.get(x);
 
-			System.out.println(loreline);
-
 			loreline.toLowerCase();
 
 			if (loreline.contains(type)) {
 
 				found = true;
 				return found;
-			} else {
-
+			} else
 				x++;
-
-			}
 
 		}
 		return found;

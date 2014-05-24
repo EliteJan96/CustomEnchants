@@ -21,6 +21,7 @@ package io.github.searchndstroy.customenchants.common;
 import io.github.searchndstroy.customenchants.commands.CustomEnchantsCommand;
 import io.github.searchndstroy.customenchants.commands.IsEnchantmentBannedCommand;
 import io.github.searchndstroy.customenchants.listeners.ExtremeKnockbackArrowListener;
+import io.github.searchndstroy.customenchants.listeners.FishingTestListener;
 import io.github.searchndstroy.customenchants.listeners.RegenEnchantWeaponListener;
 
 import java.io.IOException;
@@ -39,7 +40,7 @@ import org.mcstats.Metrics;
 
 public class CustomEnchants extends JavaPlugin {
 
-	protected final Logger logger = this.getLogger();
+	public final Logger logger = this.getLogger();
 	public static final Level info = Level.INFO;
 	public static final Level severe = Level.SEVERE;
 	
@@ -49,7 +50,7 @@ public class CustomEnchants extends JavaPlugin {
 	public static List<String> bannedenchants = new ArrayList<String>();
 	private static List<String> bannedenchantsfromconfig = new ArrayList<String>();
 	
-    protected static Economy economy = null;
+    public static Economy economy = null;
 
     private boolean setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
