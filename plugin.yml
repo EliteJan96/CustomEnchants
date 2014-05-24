@@ -1,4 +1,4 @@
-version: 1.5pre1RC3
+version: 1.5pre1RC4
 main: io.github.searchndstroy.customenchants.common.CustomEnchants
 name: CustomEnchants
 auther: searchndstroy
@@ -12,6 +12,12 @@ permissions:
             customenchants.enchantinformation: true
             customenchants.savecustomenchants: true
 commands:
+   isenchantbanned:
+      aliases: [ieb]
+      descrption: Check if a enchantment is banned.
+      usage:
+      permission: customenchants.isenchantbanned
+      permission-message: Permission denied.
    customenchants:
       aliases: [ce]
       description: Gives the player you specify a specified enchanted item. 

@@ -40,7 +40,7 @@ public class GetSecondsOrAmplifier {
 			return seconds;
 		} else {
 			
-			seconds = 0;
+			seconds = defaultseconds * 20;
 			return seconds;
 		}
 	}
@@ -66,7 +66,7 @@ public class GetSecondsOrAmplifier {
 			return amplifier;
 		} else {
 			
-			amplifier = 0;
+			amplifier = defaultamplifier - 1;
 			return amplifier;
 		}
 	}

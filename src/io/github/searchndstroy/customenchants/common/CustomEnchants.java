@@ -19,43 +19,83 @@
 package io.github.searchndstroy.customenchants.common;
 
 import io.github.searchndstroy.customenchants.commands.CustomEnchantsCommand;
+import io.github.searchndstroy.customenchants.commands.IsEnchantmentBannedCommand;
+import io.github.searchndstroy.customenchants.listeners.ExtremeKnockbackArrowListener;
 import io.github.searchndstroy.customenchants.listeners.RegenEnchantWeaponListener;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
 
 public class CustomEnchants extends JavaPlugin {
 
-	public final Logger logger = this.getLogger();
+	protected final Logger logger = this.getLogger();
 	public static final Level info = Level.INFO;
 	public static final Level severe = Level.SEVERE;
 	
 	public static FileConfiguration config;
 	
-	public final void eventRegister() {
+	public static List<String> enchantments = new ArrayList<String>();
+	public static List<String> bannedenchants = new ArrayList<String>();
+	private static List<String> bannedenchantsfromconfig = new ArrayList<String>();
+	
+    protected static Economy economy = null;
+
+    private boolean setupEconomy() {
+        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+        if (economyProvider != null) {
+            economy = economyProvider.getProvider();
+        }
+
+        return (economy != null);
+    }
+	
+	private final void eventRegister() {
 		PluginManager pm = this.getServer().getPluginManager();
 		pm.registerEvents(new RegenEnchantWeaponListener(), this);
-		pm.registerEvents(new ExtremeKnockbackArrows() , this);
+		pm.registerEvents(new ExtremeKnockbackArrowListener() , this);
+		if (!setupEconomy()) {
+			
+			logger.log(severe, "Vault not found! Not registering certain enchantments!");
+			
+		} else {
+			
+			pm.registerEvents(new FishingTestListener(), this);
+			
+		}
 	}
 	
-	public final void commandRegister() {
+	private final void commandRegister() {
 		
 		getCommand("customenchants").setExecutor(new CustomEnchantsCommand());
+		getCommand("isenchantbanned").setExecutor(new IsEnchantmentBannedCommand());
+	}
+	
+	private final void registerOtherOnLoad() {
+		
+		bannedenchantsfromconfig.addAll(config.getStringList("disabledenchantments"));
+		config = getConfig();
+		bannedenchants.addAll(bannedenchantsfromconfig);
+		enchantments.add(0, "RegenWeapon");
+		enchantments.add(1, "");
 		
 	}
 	
 	@Override
 	public void onLoad() {
 		
-		config = getConfig();
+		registerOtherOnLoad();
 	}
-	
 	@Override
 	public void onEnable() {
 		

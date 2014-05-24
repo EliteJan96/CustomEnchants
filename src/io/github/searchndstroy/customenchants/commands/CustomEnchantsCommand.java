@@ -19,15 +19,13 @@
 package io.github.searchndstroy.customenchants.commands;
 
 import io.github.searchndstroy.customenchants.common.AddEnchant;
-import io.github.searchndstroy.customenchants.common.AddEnchantType;
+import io.github.searchndstroy.customenchants.common.CustomEnchants;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -43,7 +41,7 @@ public class CustomEnchantsCommand implements CommandExecutor {
 		
 		if (args.length < 3 || args.length > 3) {
 			
-			sender.sendMessage(ChatColor.RED + "/customenchants enchant <enchantname> <tierlevel>");
+			sender.sendMessage(ChatColor.RED + "/customenchants enchant/checkstatus <enchantname> <tierlevel>");
 			
 			return false;
 		}
@@ -74,14 +72,30 @@ public class CustomEnchantsCommand implements CommandExecutor {
 				
 			}
 			
-			if (args[0].equalsIgnoreCase("enchant")) {
+			String argument = args[1];
+			
+			if (!CustomEnchants.enchantments.contains(argument)) {
 				
-				if (args[1].equalsIgnoreCase("RegenWeapon")) {
+				player.sendMessage("Enchantment " + argument + " doesn't exist! (Case sensitive!)");
+				return false;
+			}
+			
+			if (IsEnchantmentBannedCommand.isEnchantmentBanned(CustomEnchants.bannedenchants, CustomEnchants.enchantments, argument)) {
+				
+				sender.sendMessage("This enchantment is disabled! You cannot enchant with it!!!");
+				return false;
+			}
+			
+			if (args[0].equalsIgnoreCase("checkstatus")) {
+			
+			} else if (args[0].equalsIgnoreCase("enchant")) {
+				
+				if (args[1].equals(argument)) {
 					
 					try {
 					
 					int tierlevel = Integer.parseInt(args[2]);
-					AddEnchant.AddEnchantToItem(AddEnchantType.REGENWEAPON, itemstack, itemmeta, lore, player, tierlevel, false);
+					AddEnchant.AddEnchantToItem(argument, itemstack, itemmeta, lore, player, tierlevel, false, argument);
 					}
 					
 					catch (NumberFormatException ex) {
@@ -92,8 +106,6 @@ public class CustomEnchantsCommand implements CommandExecutor {
 					
 					return true;
 				}
-				
-				return false;
 			}
 			
 			return false;
@@ -101,5 +113,4 @@ public class CustomEnchantsCommand implements CommandExecutor {
 		
 		return false;
 	}
-
 }
