@@ -1,5 +1,6 @@
 package io.github.searchndstroy.customenchants.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.github.searchndstroy.customenchants.common.CustomEnchants;
@@ -10,8 +11,8 @@ import org.bukkit.command.CommandSender;
 
 public class IsEnchantmentBannedCommand implements CommandExecutor {
 	
-	private List<String> bannedenchants = CustomEnchants.bannedenchants;
-	private List<String> enchantments = CustomEnchants.enchantments;
+	private ArrayList<String> bannedenchants = (ArrayList<String>) CustomEnchants.bannedenchants;
+	private ArrayList<String> enchantments = (ArrayList<String>) CustomEnchants.enchantments;
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdlabel,
@@ -28,9 +29,11 @@ public class IsEnchantmentBannedCommand implements CommandExecutor {
 		boolean isBanned = isEnchantmentBanned(bannedenchants, enchantments, enchantment);
 		
 		if (isBanned) {
+			System.out.println(bannedenchants);
 			sender.sendMessage("Enchantment " + enchantment + " is disabled!");
 			return true;
 		} else {
+			System.out.println(bannedenchants);
 			sender.sendMessage("Enchantment " + enchantment + " isn't disabled!");
 			return false;
 		}

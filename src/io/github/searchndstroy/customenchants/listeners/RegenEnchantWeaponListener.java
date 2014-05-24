@@ -17,6 +17,7 @@
 
 package io.github.searchndstroy.customenchants.listeners;
 
+import io.github.searchndstroy.customenchants.commands.IsEnchantmentBannedCommand;
 import io.github.searchndstroy.customenchants.common.CustomEnchants;
 import io.github.searchndstroy.customenchants.common.GetLoreString;
 import io.github.searchndstroy.customenchants.common.GetSecondsOrAmplifier;
@@ -76,6 +77,9 @@ public class RegenEnchantWeaponListener implements Listener {
 		int tierlevel = RomanNumeralConverterToInt.romanToDecimal(string);
 		
 		if (tierlevel == 0)
+			return;
+		
+		if (IsEnchantmentBannedCommand.isEnchantmentBanned(CustomEnchants.bannedenchants, CustomEnchants.enchantments, enchantmentname))
 			return;
 			
 		int seconds = GetSecondsOrAmplifier.getSeconds(secondstype, defaultseconds, secondstoworkwith, tierlevel);

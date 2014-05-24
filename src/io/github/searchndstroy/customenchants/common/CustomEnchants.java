@@ -82,9 +82,7 @@ public class CustomEnchants extends JavaPlugin {
 	}
 	
 	private final void registerOtherOnLoad() {
-		
 		bannedenchantsfromconfig.addAll(config.getStringList("disabledenchantments"));
-		config = getConfig();
 		bannedenchants.addAll(bannedenchantsfromconfig);
 		enchantments.add(0, "RegenWeapon");
 		enchantments.add(1, "");
@@ -93,7 +91,7 @@ public class CustomEnchants extends JavaPlugin {
 	
 	@Override
 	public void onLoad() {
-		
+		config = getConfig();
 		registerOtherOnLoad();
 	}
 	@Override

@@ -1,8 +1,8 @@
 currencysymbol: $
-logmessage: %PLAYER% was lucky while fishing and received %MONEY%!
-playermessage: You were lucky and received %MONEY%!\
+logmessage: @PLAYER was lucky while fishing and received @MONEY!
+playermessage: You were lucky and received @MONEY!
 disabledenchantments:
- - RegenWeapon
+ -RegenWeapon
 sendplayermessages: true
 logtoconsole: true
 sidecurrencygoeson: left
