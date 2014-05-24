@@ -1,11 +1,3 @@
-currencysymbol: $
-logmessage: @PLAYER was lucky while fishing and received @MONEY!
-playermessage: You were lucky and received @MONEY!
-disabledenchantments:
- -RegenWeapon
-sendplayermessages: true
-logtoconsole: true
-sidecurrencygoeson: left
 regenweapon:
  TypeForSeconds: multiply
  secondstoworkwith: 1
@@ -14,8 +6,16 @@ regenweapon:
  amplifiertoworkwith: 1
  defaultamplifier: 1
  MaximumTierLevel: -1
+ Disabled: false
 extremeknocbackarrow:
  TypeForVelocity: add
  velocitytoworkwith: 1
  defaultvelocity: 1
  MaximumTierLevel: -1
+other:
+ currencysymbol: $
+ logmessage: //PLAYER was lucky while fishing and received //MONEY!
+ playermessage: You were lucky and received //MONEY!
+ sendplayermessages: true
+ logtoconsole: true
+ sidecurrencygoeson: left

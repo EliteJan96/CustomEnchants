@@ -41,19 +41,16 @@ public class FishingTestListener implements Listener {
 			
 			if (currencysymbolpos.equalsIgnoreCase("left")) {
 				
-				message.replace("@MONEY%", currencysymbol + objectToString(random));
-				logmessage.replace("@MONEY", currencysymbol + objectToString(random));
+				message.replace(":MONEY", currencysymbol + objectToString(random));
+				logmessage.replace(":MONEY", currencysymbol + objectToString(random));
 				
 			} else if (currencysymbolpos.equalsIgnoreCase("right")) {
 				
-				message.replace("@MONEY%", objectToString(random) + currencysymbol);
-				logmessage.replace("@MONEY", objectToString(random) + currencysymbol);
+				message.replace(":MONEY", objectToString(random) + currencysymbol);
+				logmessage.replace(":MONEY", objectToString(random) + currencysymbol);
 				
 			}
-			
-			message.replace("@MONEY%", currencysymbol + objectToString(random));
-			logmessage.replace("@MONEY", currencysymbol + objectToString(random));
-			logmessage.replace("@PLAYER", player.getName());
+			logmessage.replace(":PLAYER", player.getName());
 			
 			CustomEnchants.economy.depositPlayer(player.getName(), random);
 			player.sendMessage(message);

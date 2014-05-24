@@ -48,7 +48,6 @@ public class CustomEnchants extends JavaPlugin {
 	
 	public static List<String> enchantments = new ArrayList<String>();
 	public static List<String> bannedenchants = new ArrayList<String>();
-	private static List<String> bannedenchantsfromconfig = new ArrayList<String>();
 	
     public static Economy economy = null;
 
@@ -83,8 +82,6 @@ public class CustomEnchants extends JavaPlugin {
 	}
 	
 	private final void registerOtherOnLoad() {
-		bannedenchantsfromconfig.addAll(config.getStringList("disabledenchantments"));
-		bannedenchants.addAll(bannedenchantsfromconfig);
 		enchantments.add(0, "RegenWeapon");
 		enchantments.add(1, "");
 		

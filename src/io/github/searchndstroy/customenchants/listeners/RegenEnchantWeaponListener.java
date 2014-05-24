@@ -79,7 +79,7 @@ public class RegenEnchantWeaponListener implements Listener {
 		if (tierlevel == 0)
 			return;
 		
-		if (IsEnchantmentBannedCommand.isEnchantmentBanned(CustomEnchants.bannedenchants, CustomEnchants.enchantments, enchantmentname))
+		if (IsEnchantmentBannedCommand.isEnchantmentBanned(CustomEnchants.enchantments, enchantmentname, player))
 			return;
 			
 		int seconds = GetSecondsOrAmplifier.getSeconds(secondstype, defaultseconds, secondstoworkwith, tierlevel);

@@ -80,7 +80,7 @@ public class CustomEnchantsCommand implements CommandExecutor {
 				return false;
 			}
 			
-			if (IsEnchantmentBannedCommand.isEnchantmentBanned(CustomEnchants.bannedenchants, CustomEnchants.enchantments, argument)) {
+			if (IsEnchantmentBannedCommand.isEnchantmentBanned(CustomEnchants.enchantments, argument, sender)) {
 				
 				sender.sendMessage("This enchantment is disabled! You cannot enchant with it!!!");
 				return false;

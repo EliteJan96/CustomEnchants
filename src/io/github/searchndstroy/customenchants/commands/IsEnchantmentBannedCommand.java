@@ -1,9 +1,8 @@
 package io.github.searchndstroy.customenchants.commands;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.searchndstroy.customenchants.common.CustomEnchants;
+
+import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -12,8 +11,7 @@ import org.bukkit.command.CommandSender;
 
 public class IsEnchantmentBannedCommand implements CommandExecutor {
 	
-	private ArrayList<String> bannedenchants = (ArrayList<String>) CustomEnchants.bannedenchants;
-	private ArrayList<String> enchantments = (ArrayList<String>) CustomEnchants.enchantments;
+	private List<String> enchantments = CustomEnchants.enchantments;
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdlabel,
@@ -27,25 +25,28 @@ public class IsEnchantmentBannedCommand implements CommandExecutor {
 		
 		String enchantment = args[0];
 		
-		boolean isBanned = isEnchantmentBanned(bannedenchants, enchantments, enchantment);
+		boolean isBanned = isEnchantmentBanned(enchantments, enchantment, sender);
 		
 		if (isBanned) {
-			System.out.println(bannedenchants);
-			sender.sendMessage("Enchantment " + enchantment + " is disabled!");
+			sender.sendMessage(ChatColor.RED + "Enchantment " + enchantment + " is disabled!");
 			return true;
-		} else {
-			System.out.println(bannedenchants);
-			sender.sendMessage("Enchantment " + enchantment + " isn't disabled!");
-			return false;
+		} else if (enchantments.contains(enchantment)){
+			sender.sendMessage(ChatColor.GREEN + "Enchantment " + enchantment + " isn't disabled!");
+			return true;
 		}
+		return false;
 	}
 	
-	public static boolean isEnchantmentBanned(List<String> bannedenchants, List<String> enchantments, String enchantment) {
+	public static boolean isEnchantmentBanned(List<String> enchantments, String enchantment, CommandSender sender) {
 		
-		if (!enchantments.contains(enchantment))
+		if (!enchantments.contains(enchantment)) {
+			sender.sendMessage(ChatColor.RED + "Enchantment does not exist!");
 			return false;
+		}
 		
-		if (bannedenchants.contains(enchantment))
+		boolean banned = CustomEnchants.config.getBoolean(enchantment.toLowerCase() + ".disabled");
+		
+		if (banned)
 			return true;
 		else
 			return false;
