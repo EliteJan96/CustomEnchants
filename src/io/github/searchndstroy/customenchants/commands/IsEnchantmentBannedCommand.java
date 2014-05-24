@@ -25,7 +25,13 @@ public class IsEnchantmentBannedCommand implements CommandExecutor {
 		
 		String enchantment = args[0];
 		
-		boolean isBanned = isEnchantmentBanned(enchantments, enchantment, sender);
+		boolean isBanned = isEnchantmentBanned(enchantments, enchantment);
+		
+		if (!enchantments.contains(enchantment)) {
+			
+			sender.sendMessage("Enchantment " + enchantment + " doesn't exist!");
+			return false;
+		}
 		
 		if (isBanned) {
 			sender.sendMessage(ChatColor.RED + "Enchantment " + enchantment + " is disabled!");
@@ -37,12 +43,10 @@ public class IsEnchantmentBannedCommand implements CommandExecutor {
 		return false;
 	}
 	
-	public static boolean isEnchantmentBanned(List<String> enchantments, String enchantment, CommandSender sender) {
+	public static boolean isEnchantmentBanned(List<String> enchantments, String enchantment) {
 		
-		if (!enchantments.contains(enchantment)) {
-			sender.sendMessage(ChatColor.RED + "Enchantment does not exist!");
+		if (!enchantments.contains(enchantment))
 			return false;
-		}
 		
 		boolean banned = CustomEnchants.config.getBoolean(enchantment.toLowerCase() + ".disabled");
 		
