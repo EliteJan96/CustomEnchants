@@ -1,8 +1,9 @@
-version: 1.5pre1RC4
+version: 1.5pre1RC5
 main: io.github.searchndstroy.customenchants.common.CustomEnchants
 name: CustomEnchants
 auther: searchndstroy
 slave: megagamer10
+softdepend: [Vault]
 permissions:
     customenchants.*:
         description: Gives access to all customenchant commands
@@ -11,6 +12,7 @@ permissions:
             customenchants.reload: true
             customenchants.enchantinformation: true
             customenchants.savecustomenchants: true
+            customenchants.signshop.place: true
 commands:
    isenchantbanned:
       aliases: [ieb]

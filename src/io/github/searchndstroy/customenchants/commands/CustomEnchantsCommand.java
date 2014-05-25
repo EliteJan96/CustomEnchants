@@ -95,7 +95,7 @@ public class CustomEnchantsCommand implements CommandExecutor {
 					try {
 					
 					int tierlevel = Integer.parseInt(args[2]);
-					AddEnchant.AddEnchantToItem(argument, itemstack, itemmeta, lore, player, tierlevel, false, argument);
+					AddEnchant.AddEnchantToItem(argument, itemstack, itemmeta, lore, player, tierlevel, false);
 					}
 					
 					catch (NumberFormatException ex) {

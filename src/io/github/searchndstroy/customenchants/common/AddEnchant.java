@@ -28,14 +28,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class AddEnchant {
 
 	
-	public static void AddEnchantToItem(String type, ItemStack itemstack, ItemMeta itemmeta, List<String> lore, Player player, int tierlevel, boolean bypasslorecheck, String argument) {
+	public static void AddEnchantToItem(String type, ItemStack itemstack, ItemMeta itemmeta, List<String> lore, Player player, int tierlevel, boolean bypasslorecheck) {
 
 		int maxtierlevel = CustomEnchants.config.getInt(type.toLowerCase() + ".MaximumTierLevel");
 		
 		if (!CustomEnchants.enchantments.contains(type))
 			return;
 
-		if (ItemHasCurrentEnchant(itemmeta, lore, type)&& !bypasslorecheck) {
+		if (ItemHasCurrentEnchant(itemmeta, lore, type) && !bypasslorecheck) {
 			
 			player.sendMessage(ChatColor.RED + "This item already has " + type + " on it!");
 			return;
@@ -64,7 +64,7 @@ public class AddEnchant {
 	}
 
 	public static boolean ItemHasCurrentEnchant(ItemMeta itemmeta, List<String> lore, String type) {
-
+		
 		if (!itemmeta.hasLore())
 			return false;
 

@@ -64,6 +64,7 @@ public class CustomEnchants extends JavaPlugin {
 		PluginManager pm = this.getServer().getPluginManager();
 		pm.registerEvents(new RegenEnchantWeaponListener(), this);
 		pm.registerEvents(new ExtremeKnockbackArrowListener() , this);
+		pm.registerEvents(new SignInteractListener(), this);
 		if (!setupEconomy()) {
 			
 			logger.log(severe, "Vault not found! Not registering certain enchantments!");

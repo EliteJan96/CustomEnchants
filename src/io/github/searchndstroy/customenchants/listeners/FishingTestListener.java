@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 
 public class FishingTestListener implements Listener {
 	
-	private String objectToString(Object arg) {
+	public static String objectToString(Object arg) {
 		
 		String string = arg + "";
 		
