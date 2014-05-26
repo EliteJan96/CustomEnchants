@@ -5,42 +5,79 @@ auther: searchndstroy
 slave: megagamer10
 softdepend: [Vault]
 permissions:
+    customenchants.isenchantbanned:
+        description: Permission to see if a enchantment is disabled.
+        default: op
+    customenchants.enchantinformation:
+        description: Permission to view the inventory GUI containing books about our enchantments.
+        default: op
+    customenchants.signshop.use:
+        description: Permission to use CE's signshops.
+        default: true
+    customenchants.signshops.place:
+        description: Permission to place enchantsigns.
+        default: op
+    customenchants.signshops.break:
+        description: Permission to break enchantsigns.
+        default: op
+    customenchants.signshops.*:
+        description: All signshops permissions.
+        default: op
+        children:
+            customenchants.signshops.break: true
+            customenchants.signshops.place: true
+            customenchants.signshops.use: true
+    customenchants.config.reload:
+        description: Permission to reload customenchant's config.
+        default: op
+    customenchants.config.save:
+        description: Permission to save customenchant's config.
+        default: op
+    customenchants.config.*:
+        description: Permission to all config commands.
+        default: op
+        children:
+            customenchants.config.reload: true
+            customenchants.config.save: true
     customenchants.*:
-        description: Gives access to all customenchant commands
+        description: Gives access to all customenchant commands/abilities
         children:
             customenchants.customenchants: true
             customenchants.reload: true
             customenchants.enchantinformation: true
             customenchants.savecustomenchants: true
             customenchants.signshop.place: true
+            customenchants.signshop.use: true
+            customenchants.signshop.break: true
+            customenchants.enchantinformation: true
 commands:
    isenchantbanned:
       aliases: [ieb]
       descrption: Check if a enchantment is banned.
-      usage:
+      usage: /isenchantbanned <enchantment>
       permission: customenchants.isenchantbanned
       permission-message: Permission denied.
    customenchants:
       aliases: [ce]
       description: Gives the player you specify a specified enchanted item. 
-      usage: 
+      usage: /customenchants enchant <enchantmentname(CASE SENSITIVE)> <tierlevel>
       permission: customenchants.customenchants
       permission-message: Permission denied.
    reloadcustomenchants:
       aliases: [rce]
       description: Reloads customenchants config.
-      usage:
-      permission: customenchants.reload
+      usage: /reloadcustomenchants
+      permission: customenchants.config.reload
       permission-message: Permission denied.
    enchantinformation:
       aliases: [ei]
       description: Opens up a inventory containing books explaining enchantments.
-      usage:
+      usage: /enchantinformation
       permission: customenchants.enchantinformation
       permission-message: Permission denied.
    savecustomenchants:
       aliases: [sce]
       description: Saves the customenchant config.
-      usage:
-      permission: customenchants.savecustomenchants
+      usage: /savecustomenchants
+      permission: customenchants.config.save
       permission-message: Permission denied.

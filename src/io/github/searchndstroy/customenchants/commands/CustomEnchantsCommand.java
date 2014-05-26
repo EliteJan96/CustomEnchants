@@ -40,9 +40,6 @@ public class CustomEnchantsCommand implements CommandExecutor {
 			String[] args) {
 		
 		if (args.length < 3 || args.length > 3) {
-			
-			sender.sendMessage(ChatColor.RED + "/customenchants enchant/checkstatus <enchantname> <tierlevel>");
-			
 			return false;
 		}
 		
@@ -59,35 +56,28 @@ public class CustomEnchantsCommand implements CommandExecutor {
 				
 				player.sendMessage("Put a item in your hand!");
 				
-				return false;
+				return true;
 			}
 			
 			ItemMeta itemmeta = itemstack.getItemMeta();
 			
 			List<String> lore = itemmeta.getLore();
 			
-			if (lore == null) {
-				
+			if (lore == null)
 				lore = new ArrayList<String>();
-				
-			}
 			
 			String argument = args[1];
 			
 			if (!CustomEnchants.enchantments.contains(argument)) {
 				
-				player.sendMessage("Enchantment " + argument + " doesn't exist! (Case sensitive!)");
-				return false;
+				player.sendMessage(ChatColor.RED + "Enchantment " + argument + " doesn't exist! (Case sensitive!)");
+				return true;
 			}
 			
 			if (IsEnchantmentBannedCommand.isEnchantmentBanned(CustomEnchants.enchantments, argument)) {
 				
-				sender.sendMessage("This enchantment is disabled! You cannot enchant with it!!!");
-				return false;
-			}
-			
-			if (args[0].equalsIgnoreCase("checkstatus")) {
-			
+				sender.sendMessage(ChatColor.RED + "This enchantment is disabled! You cannot enchant with it!!!");
+				return true;
 			} else if (args[0].equalsIgnoreCase("enchant")) {
 				
 				if (args[1].equals(argument)) {
@@ -100,17 +90,16 @@ public class CustomEnchantsCommand implements CommandExecutor {
 					
 					catch (NumberFormatException ex) {
 						
-						sender.sendMessage("Use a number!");
-						return false;
+						sender.sendMessage(ChatColor.RED + "Use a number!");
+						return true;
 					}
-					
+
 					return true;
 				}
+
+				return false;
 			}
-			
-			return false;
 		}
-		
 		return false;
 	}
 }

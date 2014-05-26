@@ -17,7 +17,7 @@
 
 package io.github.searchndstroy.customenchants.listeners;
 
-import io.github.searchndstroy.customenchants.common.CustomEnchants;
+//import io.github.searchndstroy.customenchants.common.CustomEnchants;
 import io.github.searchndstroy.customenchants.common.GetLoreString;
 import io.github.searchndstroy.customenchants.common.RomanNumeralConverterToInt;
 
@@ -34,9 +34,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ExtremeKnockbackArrowListener implements Listener {
 	
-	private int maxtierlevel = CustomEnchants.config.getInt("extremeknocbackarrow.MaximumTierLevel");
+	//private int maxtierlevel = CustomEnchants.config.getInt("extremeknocbackarrow.MaximumTierLevel");
 	private String enchantmentname = "ExtremeKnocbackArrow";
-	private String type = CustomEnchants.config.getString("extremeknockbackarrow.TypeForVelocity");
+	//private String type = CustomEnchants.config.getString("extremeknockbackarrow.TypeForVelocity");
 	
 	@EventHandler(ignoreCancelled = true)
 	public void onEntityShootBowEvent(EntityShootBowEvent e) {
@@ -58,7 +58,7 @@ public class ExtremeKnockbackArrowListener implements Listener {
 		
 		List<String> lore = im.getLore();
 		
-		String string = GetLoreString.getLoreString(lore, maxtierlevel, enchantmentname);
+		String string = GetLoreString.getLoreString(lore, enchantmentname);
 		
 		int tierlevel = RomanNumeralConverterToInt.romanToDecimal(string);
 		

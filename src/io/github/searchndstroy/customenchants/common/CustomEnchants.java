@@ -23,6 +23,9 @@ import io.github.searchndstroy.customenchants.commands.IsEnchantmentBannedComman
 import io.github.searchndstroy.customenchants.listeners.ExtremeKnockbackArrowListener;
 import io.github.searchndstroy.customenchants.listeners.FishingTestListener;
 import io.github.searchndstroy.customenchants.listeners.RegenEnchantWeaponListener;
+import io.github.searchndstroy.customenchants.listeners.SignBreakListener;
+import io.github.searchndstroy.customenchants.listeners.SignInteractListener;
+import io.github.searchndstroy.customenchants.listeners.SignPlaceListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,6 +34,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
@@ -50,6 +54,7 @@ public class CustomEnchants extends JavaPlugin {
 	public static List<String> bannedenchants = new ArrayList<String>();
 	
     public static Economy economy = null;
+    public static Permission permission = null;
 
     private boolean setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
@@ -59,19 +64,30 @@ public class CustomEnchants extends JavaPlugin {
 
         return (economy != null);
     }
+    
+    private boolean setupPermissions()
+    {
+        RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
+        if (permissionProvider != null) {
+            permission = permissionProvider.getProvider();
+        }
+        return (permission != null);
+    }
+
 	
 	private final void eventRegister() {
 		PluginManager pm = this.getServer().getPluginManager();
 		pm.registerEvents(new RegenEnchantWeaponListener(), this);
 		pm.registerEvents(new ExtremeKnockbackArrowListener() , this);
+		pm.registerEvents(new FishingTestListener(), this);
 		pm.registerEvents(new SignInteractListener(), this);
-		if (!setupEconomy()) {
+		pm.registerEvents(new SignPlaceListener(), this);
+		pm.registerEvents(new SignBreakListener(), this);
+		if (!setupEconomy() || !setupPermissions()) {
 			
-			logger.log(severe, "Vault not found! Not registering certain enchantments!");
-			
+			logger.log(severe, "Vault/Permission plugin not found! Not registering certain features! You need Vault and a permissions plugin!!");
 		} else {
 			
-			pm.registerEvents(new FishingTestListener(), this);
 			
 		}
 	}

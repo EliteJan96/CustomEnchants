@@ -26,7 +26,6 @@ import io.github.searchndstroy.customenchants.common.RomanNumeralConverterToInt;
 import java.util.List;
 
 import org.bukkit.Material;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -73,11 +72,11 @@ public class RegenEnchantWeaponListener implements Listener {
 		
 		List<String> lore = im.getLore();
 		
-		String string = GetLoreString.getLoreString(lore, maxtierlevel, enchantmentname);
+		String string = GetLoreString.getLoreString(lore, enchantmentname);
 		
 		int tierlevel = RomanNumeralConverterToInt.romanToDecimal(string);
 		
-		if (tierlevel == 0)
+		if (tierlevel == 0 || tierlevel > maxtierlevel)
 			return;
 		
 		if (IsEnchantmentBannedCommand.isEnchantmentBanned(CustomEnchants.enchantments, enchantmentname))

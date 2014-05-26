@@ -1,8 +1,10 @@
-package io.github.searchndstroy.customenchants.common;
+package io.github.searchndstroy.customenchants.listeners;
 
-import io.github.searchndstroy.customenchants.listeners.FishingTestListener;
+import io.github.searchndstroy.customenchants.common.AddEnchant;
+import io.github.searchndstroy.customenchants.common.CustomEnchants;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -13,28 +15,50 @@ import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class SignInteractListener implements Listener {
 	
+	private String permission;
+	
 	@EventHandler(ignoreCancelled = true)
 	public void onPlayerInteract(PlayerInteractEvent e) {
+		
+		Action action = e.getAction();
+		
+		permission = "customenchants.signshop.use";
+		
+		if (!action.equals(Action.RIGHT_CLICK_BLOCK))
+			return;
 		
 		Block block = e.getClickedBlock();
 		Player player = e.getPlayer();
 		String playername = player.getName();
 		
-		if (block.getType() == Material.SIGN_POST || block.getType() == Material.WALL_SIGN) {
+		if (!(block.getType() == Material.SIGN_POST) || !(block.getType() == Material.WALL_SIGN))
+			return;
+		
+		if (block.getType() != null) {
 		
 			Sign sign = (Sign) block.getState();
-			String line0 = sign.getLine(0);
+			List<String> lines = Arrays.asList(sign.getLines());
+			
+			String line0 = lines.get(0);
 
 			if (line0.isEmpty() || !line0.equalsIgnoreCase("[enchantsign]"))
 				return;
+			
+			if (!CustomEnchants.permission.has(player, permission)) {
+				
+				player.sendMessage(ChatColor.RED + "You need to have customenchants.signshop.use to buy enchantments off signs!");
+				return;
+			}
+			
 
-			String line1 = sign.getLine(1);
+			String line1 = lines.get(1);
 			
 			if (!CustomEnchants.enchantments.contains(line1) || line1.isEmpty())
 				return;
@@ -43,8 +67,13 @@ public class SignInteractListener implements Listener {
 			ItemMeta itemmeta = itemstack.getItemMeta();
 			List<String> lore;
 			
-			if (itemstack == null || itemstack.getType().equals(Material.AIR))
+			if (itemstack == null || itemstack.getType().equals(Material.AIR)) {
+				
+				player.sendMessage(ChatColor.RED + "Have a valid item in your hand!");
 				return;
+		}
+			
+			System.out.println("Test7");
 			
 			if (itemmeta.getLore() == null || itemmeta.getLore().isEmpty()) {
 				
@@ -54,7 +83,7 @@ public class SignInteractListener implements Listener {
 				lore = itemmeta.getLore();
 			}
 			
-			String line2 = sign.getLine(2);
+			String line2 = lines.get(2);
 			
 			int tierlevel;
 			
@@ -64,7 +93,7 @@ public class SignInteractListener implements Listener {
 			try {
 				
 				cost = Double.parseDouble(line2);
-				String line3 = sign.getLine(3);
+				String line3 = lines.get(3);
 				tierlevel = Integer.parseInt(line3);
 				itemhasenchant = AddEnchant.ItemHasCurrentEnchant(itemmeta, lore, line1);
 			}
@@ -73,17 +102,24 @@ public class SignInteractListener implements Listener {
 				return;
 			}
 			
-			if (itemhasenchant)
-				return;
+			System.out.println("Test8");
 			
-			double playerbalance = CustomEnchants.economy.getBalance(playername);
+			if (itemhasenchant) {
+				
+				player.sendMessage("You already have this enchantment on your item!");
+				return;
+			}
+			
+			System.out.println("Test9");
+			
+			double playerbalance = CustomEnchants.economy.getBalance(player);
 			
 			if (playerbalance < cost) {
 				player.sendMessage(ChatColor.RED + "You do not have enough balance for this enchantment!");
 				return;
 			}
 			
-			System.out.println("Test1");
+			System.out.println("Test10");
 			
 			String currencysymbol = CustomEnchants.config.getString("other.currencysymbol");
 			String currencysymbolpos = CustomEnchants.config.getString("other.sidecurrencygoeson");
@@ -96,7 +132,7 @@ public class SignInteractListener implements Listener {
 			else
 				stringcost = coststring;
 			
-			CustomEnchants.economy.withdrawPlayer(playername, cost);
+			CustomEnchants.economy.withdrawPlayer(player, cost);
 			
 			CustomEnchants.getPlugin(CustomEnchants.class).logger.log(Level.INFO, "Player " + playername + " bought " + line1 + " " + tierlevel + " for " + stringcost);
 			player.sendMessage(ChatColor.YELLOW + "You payed " + stringcost + " for " + line1 + " " + tierlevel + "!");

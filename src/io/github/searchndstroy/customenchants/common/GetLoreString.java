@@ -24,7 +24,7 @@ import org.bukkit.ChatColor;
 
 public class GetLoreString {
 	
-	public static String getLoreString(List<String> lore, int maxtierlevel, String enchantname) {
+	public static String getLoreString(List<String> lore, String enchantname) {
 		
 		String nothing = "";
 		
@@ -38,8 +38,6 @@ public class GetLoreString {
 			String loreline = lore.get(y).toLowerCase();
 			
 			enchantname = enchantname.toLowerCase();
-			
-			
 			if (loreline.contains(enchantname)) {
 				
 				String converted = loreline.replace(ChatColor.GRAY + enchantname + " ", nothing).toUpperCase();

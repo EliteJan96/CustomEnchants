@@ -52,7 +52,7 @@ public class FishingTestListener implements Listener {
 			}
 			logmessage.replace(":PLAYER", player.getName());
 			
-			CustomEnchants.economy.depositPlayer(player.getName(), random);
+			CustomEnchants.economy.depositPlayer(player, random);
 			player.sendMessage(message);
 			CustomEnchants plugin = new CustomEnchants();
 			plugin.logger.log(Level.INFO, logmessage);
