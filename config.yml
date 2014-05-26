@@ -2,9 +2,9 @@ regenweapon:
  TypeForSeconds: multiply
  secondstoworkwith: 1
  defaultseconds: 1
- TypeForAmplifier: add
+ TypeForAmplifier: none
  amplifiertoworkwith: 1
- defaultamplifier: 1
+ defaultamplifier: 3
  MaximumTierLevel: -1
  Disabled: false
 extremeknocbackarrow:
@@ -12,10 +12,11 @@ extremeknocbackarrow:
  velocitytoworkwith: 1
  defaultvelocity: 1
  MaximumTierLevel: -1
+luckyfishing:
+ logmessage: (PLAYER) was lucky while fishing and received (MONEY)!
+ playermessage: You were lucky and received (MONEY)!
 other:
  currencysymbol: $
- logmessage: :PLAYER was lucky while fishing and received :MONEY!
- playermessage: You were lucky and received :MONEY!
  sendplayermessages: true
  logtoconsole: true
  sidecurrencygoeson: left

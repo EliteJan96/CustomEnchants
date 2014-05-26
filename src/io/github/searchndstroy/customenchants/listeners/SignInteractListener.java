@@ -29,129 +29,107 @@ public class SignInteractListener implements Listener {
 		
 		Action action = e.getAction();
 		
-		System.out.println("Test1");
-		
 		permission = "customenchants.signshop.use";
 		
 		if (!action.equals(Action.RIGHT_CLICK_BLOCK))
 			return;
 		
-		System.out.println("Test2");
-		
 		Block block = e.getClickedBlock();
 		Player player = e.getPlayer();
 		String playername = player.getName();
 		
-		if (!(block.getType() == Material.SIGN_POST) || !(block.getType() == Material.WALL_SIGN))
+		if (block instanceof Sign)
+			return;
+
+		Sign sign = (Sign) block.getState();
+		List<String> lines = Arrays.asList(sign.getLines());
+
+		String line0 = lines.get(0);
+
+		if (line0.isEmpty() || !line0.equalsIgnoreCase("[enchantsign]"))
 			return;
 		
-		System.out.println("Test3");
-		
-		if (block.getType() != null) {
-			
-			System.out.println("Test4");
-		
-			Sign sign = (Sign) block.getState();
-			List<String> lines = Arrays.asList(sign.getLines());
-			
-			String line0 = lines.get(0);
+		if (!CustomEnchants.permission.has(player, permission)) {
 
-			if (line0.isEmpty() || !line0.equalsIgnoreCase("[enchantsign]"))
-				return;
-			System.out.println("Test5")
-			;
-			if (!CustomEnchants.permission.has(player, permission)) {
-				
-				player.sendMessage(ChatColor.RED + "You need to have customenchants.signshop.use to buy enchantments off signs!");
-				return;
-			}
-			
-			System.out.println("Test6");
-
-			String line1 = lines.get(1);
-			
-			if (!CustomEnchants.enchantments.contains(line1) || line1.isEmpty())
-				return;
-			
-			System.out.println("Test7");
-			
-			ItemStack itemstack = player.getInventory().getItemInHand();
-			ItemMeta itemmeta = itemstack.getItemMeta();
-			List<String> lore;
-			
-			System.out.println("Test8");
-			
-			if (itemstack == null || itemstack.getType().equals(Material.AIR)) {
-				
-				player.sendMessage(ChatColor.RED + "Have a valid item in your hand!");
-				return;
-		}
-			
-			System.out.println("Test9");
-			
-			if (itemmeta.getLore() == null || itemmeta.getLore().isEmpty()) {
-				
-				lore = new ArrayList<String>();
-				
-			} else {
-				lore = itemmeta.getLore();
-			}
-			
-			String line2 = lines.get(2);
-			
-			int tierlevel;
-			
-			boolean itemhasenchant;
-			double cost;
-			
-			try {
-				
-				cost = Double.parseDouble(line2);
-				String line3 = lines.get(3);
-				tierlevel = Integer.parseInt(line3);
-				itemhasenchant = AddEnchant.ItemHasCurrentEnchant(itemmeta, lore, line1);
-			}
-			
-			catch (NumberFormatException ex) {
-				return;
-			}
-			
-			System.out.println("Test10");
-			
-			if (itemhasenchant) {
-				
-				player.sendMessage("You already have this enchantment on your item!");
-				return;
-			}
-			
-			System.out.println("Test11");
-			
-			double playerbalance = CustomEnchants.economy.getBalance(player);
-			
-			if (playerbalance < cost) {
-				player.sendMessage(ChatColor.RED + "You do not have enough balance for this enchantment!");
-				return;
-			}
-			
-			System.out.println("Test11");
-			
-			String currencysymbol = CustomEnchants.config.getString("other.currencysymbol");
-			String currencysymbolpos = CustomEnchants.config.getString("other.sidecurrencygoeson");
-			String coststring = FishingTestListener.objectToString(cost);
-			String stringcost;
-			if (currencysymbolpos.equalsIgnoreCase("left"))
-				stringcost = currencysymbol + coststring;	
-			else if(currencysymbolpos.equalsIgnoreCase("right"))
-				stringcost = coststring + currencysymbol;
-			else
-				stringcost = coststring;
-			
-			CustomEnchants.economy.withdrawPlayer(player, cost);
-			
-			CustomEnchants.getPlugin(CustomEnchants.class).logger.log(Level.INFO, "Player " + playername + " bought " + line1 + " " + tierlevel + " for " + stringcost);
-			player.sendMessage(ChatColor.YELLOW + "You payed " + stringcost + " for " + line1 + " " + tierlevel + "!");
-			AddEnchant.AddEnchantToItem(line1, itemstack, itemmeta, lore, player, tierlevel, false);
+			player.sendMessage(ChatColor.RED
+					+ "You need to have customenchants.signshop.use to buy enchantments off signs!");
+			return;
 		}
 
+		String line1 = lines.get(1);
+
+		if (!CustomEnchants.enchantments.contains(line1) || line1.isEmpty())
+			return;
+
+		ItemStack itemstack = player.getInventory().getItemInHand();
+		ItemMeta itemmeta = itemstack.getItemMeta();
+		List<String> lore;
+
+		if (itemstack == null || itemstack.getType().equals(Material.AIR)) {
+
+			player.sendMessage(ChatColor.RED
+					+ "Have a valid item in your hand!");
+			return;
+		}
+
+		if (itemmeta.getLore() == null || itemmeta.getLore().isEmpty()) {
+
+			lore = new ArrayList<String>();
+
+		} else {
+			lore = itemmeta.getLore();
+		}
+
+		String line2 = lines.get(2);
+
+		int tierlevel;
+
+		boolean itemhasenchant;
+		double cost;
+
+		try {
+
+			cost = Double.parseDouble(line2);
+			String line3 = lines.get(3);
+			tierlevel = Integer.parseInt(line3);
+			itemhasenchant = AddEnchant.ItemHasCurrentEnchant(itemmeta, lore,
+					line1);
+		}
+
+		catch (NumberFormatException ex) {
+			return;
+		}
+
+		if (itemhasenchant) {
+
+			player.sendMessage("You already have this enchantment on your item!");
+			return;
+		}
+
+		double playerbalance = CustomEnchants.economy.getBalance(player);
+
+		if (playerbalance < cost) {
+			player.sendMessage(ChatColor.RED
+					+ "You do not have enough balance for this enchantment!");
+			return;
+		}
+
+		String currencysymbol = "$";
+		String currencysymbolpos = CustomEnchants.config.getString("other.sidecurrencygoeson");
+		String coststring = FishingTestListener.objectToString(cost);
+		String stringcost;
+		if (currencysymbolpos.equalsIgnoreCase("left"))
+			stringcost = currencysymbol + coststring;
+		else if (currencysymbolpos.equalsIgnoreCase("right"))
+			stringcost = coststring + currencysymbol;
+		else
+			stringcost = coststring;
+
+		CustomEnchants.economy.withdrawPlayer(player, cost);
+
+		CustomEnchants.getPlugin(CustomEnchants.class).logger.log(Level.INFO, "Player " + playername + " bought " + line1 + " " + tierlevel + " for " + stringcost);
+		player.sendMessage(ChatColor.YELLOW + "You payed " + stringcost	+ " for " + line1 + " " + tierlevel + "!");
+		AddEnchant.AddEnchantToItem(line1, itemstack, itemmeta, lore, player,tierlevel, false);
 	}
+
 }
