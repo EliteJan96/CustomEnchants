@@ -65,8 +65,7 @@ public class CustomEnchants extends JavaPlugin {
         return (economy != null);
     }
     
-    private boolean setupPermissions()
-    {
+    private boolean setupPermissions() {
         RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
         if (permissionProvider != null) {
             permission = permissionProvider.getProvider();
@@ -79,16 +78,15 @@ public class CustomEnchants extends JavaPlugin {
 		PluginManager pm = this.getServer().getPluginManager();
 		pm.registerEvents(new RegenEnchantWeaponListener(), this);
 		pm.registerEvents(new ExtremeKnockbackArrowListener() , this);
-		pm.registerEvents(new FishingTestListener(), this);
-		pm.registerEvents(new SignInteractListener(), this);
-		pm.registerEvents(new SignPlaceListener(), this);
-		pm.registerEvents(new SignBreakListener(), this);
 		if (!setupEconomy() || !setupPermissions()) {
 			
 			logger.log(severe, "Vault/Permission plugin not found! Not registering certain features! You need Vault and a permissions plugin!!");
 		} else {
 			
-			
+			pm.registerEvents(new FishingTestListener(), this);
+			pm.registerEvents(new SignInteractListener(), this);
+			pm.registerEvents(new SignPlaceListener(), this);
+			pm.registerEvents(new SignBreakListener(), this);
 		}
 	}
 	
@@ -96,6 +94,7 @@ public class CustomEnchants extends JavaPlugin {
 		
 		getCommand("customenchants").setExecutor(new CustomEnchantsCommand());
 		getCommand("isenchantbanned").setExecutor(new IsEnchantmentBannedCommand());
+		getCommand("reloadcustomenchants").setExecutor(new ReloadConfigCommand());
 	}
 	
 	private final void registerOtherOnLoad() {

@@ -29,7 +29,7 @@ public class SignInteractListener implements Listener {
 		
 		Action action = e.getAction();
 		
-		permission = "customenchants.signshop.use";
+		permission = "-customenchants.signshop.use";
 		
 		if (!action.equals(Action.RIGHT_CLICK_BLOCK))
 			return;
@@ -38,7 +38,9 @@ public class SignInteractListener implements Listener {
 		Player player = e.getPlayer();
 		String playername = player.getName();
 		
-		if (block instanceof Sign)
+		if (block.getType() == Material.WALL_SIGN || block.getType() == Material.SIGN_POST) {
+			
+		} else
 			return;
 
 		Sign sign = (Sign) block.getState();
@@ -49,10 +51,9 @@ public class SignInteractListener implements Listener {
 		if (line0.isEmpty() || !line0.equalsIgnoreCase("[enchantsign]"))
 			return;
 		
-		if (!CustomEnchants.permission.has(player, permission)) {
+		if (CustomEnchants.permission.has(player, permission)) {
 
-			player.sendMessage(ChatColor.RED
-					+ "You need to have customenchants.signshop.use to buy enchantments off signs!");
+			player.sendMessage(ChatColor.RED + "You need to have customenchants.signshop.use to buy enchantments off signs!");
 			return;
 		}
 
@@ -102,7 +103,8 @@ public class SignInteractListener implements Listener {
 
 		if (itemhasenchant) {
 
-			player.sendMessage("You already have this enchantment on your item!");
+			player.sendMessage(ChatColor.RED + "You already have this enchantment on your item!");
+			e.setCancelled(true);
 			return;
 		}
 
@@ -111,6 +113,7 @@ public class SignInteractListener implements Listener {
 		if (playerbalance < cost) {
 			player.sendMessage(ChatColor.RED
 					+ "You do not have enough balance for this enchantment!");
+			e.setCancelled(true);
 			return;
 		}
 
@@ -130,6 +133,7 @@ public class SignInteractListener implements Listener {
 		CustomEnchants.getPlugin(CustomEnchants.class).logger.log(Level.INFO, "Player " + playername + " bought " + line1 + " " + tierlevel + " for " + stringcost);
 		player.sendMessage(ChatColor.YELLOW + "You payed " + stringcost	+ " for " + line1 + " " + tierlevel + "!");
 		AddEnchant.AddEnchantToItem(line1, itemstack, itemmeta, lore, player,tierlevel, false);
+		e.setCancelled(true);
 	}
 
 }
