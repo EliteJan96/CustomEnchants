@@ -29,10 +29,14 @@ public class SignInteractListener implements Listener {
 		
 		Action action = e.getAction();
 		
+		System.out.println("Test1");
+		
 		permission = "customenchants.signshop.use";
 		
 		if (!action.equals(Action.RIGHT_CLICK_BLOCK))
 			return;
+		
+		System.out.println("Test2");
 		
 		Block block = e.getClickedBlock();
 		Player player = e.getPlayer();
@@ -41,7 +45,11 @@ public class SignInteractListener implements Listener {
 		if (!(block.getType() == Material.SIGN_POST) || !(block.getType() == Material.WALL_SIGN))
 			return;
 		
+		System.out.println("Test3");
+		
 		if (block.getType() != null) {
+			
+			System.out.println("Test4");
 		
 			Sign sign = (Sign) block.getState();
 			List<String> lines = Arrays.asList(sign.getLines());
@@ -50,22 +58,28 @@ public class SignInteractListener implements Listener {
 
 			if (line0.isEmpty() || !line0.equalsIgnoreCase("[enchantsign]"))
 				return;
-			
+			System.out.println("Test5")
+			;
 			if (!CustomEnchants.permission.has(player, permission)) {
 				
 				player.sendMessage(ChatColor.RED + "You need to have customenchants.signshop.use to buy enchantments off signs!");
 				return;
 			}
 			
+			System.out.println("Test6");
 
 			String line1 = lines.get(1);
 			
 			if (!CustomEnchants.enchantments.contains(line1) || line1.isEmpty())
 				return;
 			
+			System.out.println("Test7");
+			
 			ItemStack itemstack = player.getInventory().getItemInHand();
 			ItemMeta itemmeta = itemstack.getItemMeta();
 			List<String> lore;
+			
+			System.out.println("Test8");
 			
 			if (itemstack == null || itemstack.getType().equals(Material.AIR)) {
 				
@@ -73,7 +87,7 @@ public class SignInteractListener implements Listener {
 				return;
 		}
 			
-			System.out.println("Test7");
+			System.out.println("Test9");
 			
 			if (itemmeta.getLore() == null || itemmeta.getLore().isEmpty()) {
 				
@@ -102,7 +116,7 @@ public class SignInteractListener implements Listener {
 				return;
 			}
 			
-			System.out.println("Test8");
+			System.out.println("Test10");
 			
 			if (itemhasenchant) {
 				
@@ -110,7 +124,7 @@ public class SignInteractListener implements Listener {
 				return;
 			}
 			
-			System.out.println("Test9");
+			System.out.println("Test11");
 			
 			double playerbalance = CustomEnchants.economy.getBalance(player);
 			
@@ -119,7 +133,7 @@ public class SignInteractListener implements Listener {
 				return;
 			}
 			
-			System.out.println("Test10");
+			System.out.println("Test11");
 			
 			String currencysymbol = CustomEnchants.config.getString("other.currencysymbol");
 			String currencysymbolpos = CustomEnchants.config.getString("other.sidecurrencygoeson");

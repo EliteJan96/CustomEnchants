@@ -38,7 +38,6 @@ public class CustomEnchantsCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdlabel,
 			String[] args) {
-		
 		if (args.length < 3 || args.length > 3) {
 			return false;
 		}
@@ -48,6 +47,7 @@ public class CustomEnchantsCommand implements CommandExecutor {
 			sender.sendMessage("You cannot run this command as console!");
 			
 		} else {
+			
 			Player player = (Player) sender;
 			
 			ItemStack itemstack = player.getItemInHand();
